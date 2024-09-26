@@ -1,0 +1,11 @@
+
+.boolean-info span {
+    margin-left: 6px;
+}
+
+.bool-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}

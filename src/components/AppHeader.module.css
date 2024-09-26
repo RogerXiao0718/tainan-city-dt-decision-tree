@@ -1,0 +1,20 @@
+.header-container {
+    width: 100%;
+    height: var(--header-height);
+    border-bottom: 1px solid #7f8c8d;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: bold;
+    font-size: 28px;
+    padding-left: 20px;
+    background-color: #dfe6e9;
+    color: #2d3436;
+    box-shadow: 0px 0px 4px 0px #2d3436;
+}
+
+.logo-image {
+    margin-right: 20px;
+    
+}
