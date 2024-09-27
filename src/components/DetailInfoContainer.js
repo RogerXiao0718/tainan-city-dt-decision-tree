@@ -2,11 +2,11 @@ import styles from './DetailInfoContainer.module.css'
 import BooleanInfo from '@/components/BooleanInfo'
 
 export default function DetailInfoContainer({currentProposal}) {
-
+    console.log('DetailInfo', currentProposal)
     return (
         <div>
             {
-                (currentProposal) && (
+                currentProposal && (
                     <div className={`${styles['detail-info-container']}`}>
                         <div className={`${styles['proposal-title-container']}`}>
                             {currentProposal.name}

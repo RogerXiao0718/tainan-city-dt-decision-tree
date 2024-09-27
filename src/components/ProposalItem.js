@@ -3,10 +3,12 @@ import Image from 'next/image'
 
 
 export default function ProposalItem(props) {
-    const {name, departments, index, setCurrentProposal} = props;
+    const {proposal, setCurrentProposal} = props;
+    const {name, departments} = proposal
 
     function onProposalItemClicked() {
-        setCurrentProposal(index)
+        console.log(proposal)
+        setCurrentProposal(proposal)
     }
 
     return (

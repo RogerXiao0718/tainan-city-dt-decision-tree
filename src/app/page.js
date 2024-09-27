@@ -9,11 +9,13 @@ import LoadingBouncer from '@/components/LoadingBouncer'
 import { useState, useEffect, useContext } from 'react'
 import { FilterRuleContext } from '@/context/FilterRuleProvider'
 import { ProposalListContext} from '@/context/ProposalListProvider'
+import Draggable from "react-draggable"
 
 
 export default function Home() {
     const [currentProposal, setCurrentProposal] = useState(null)
     const [filterUIAppear, setFilterUIAppear] = useState(false)
+    const [decisionTreeAppear, setDecisionTreeAppear] = useState(false)
     const { filterRule, setFilterRule, stringArrayFilterRule } = useContext(FilterRuleContext)
     const { proposalList, setProposalList, initialProposal } = useContext(ProposalListContext)
     useEffect(() => {
@@ -59,6 +61,10 @@ export default function Home() {
         setFilterUIAppear(!filterUIAppear)
     }
 
+    function onDecisionTreeTagClicked() {
+        setDecisionTreeAppear(!decisionTreeAppear)
+    }
+
     return (
         <div className={`${styles['main']}`}>
             <div className={`${styles['proposal-list']}`}>
@@ -77,7 +83,7 @@ export default function Home() {
                         proposalList ? proposalList.map(
                             (proposal, index) => {
                                 return (
-                                    <ProposalItem key={index} {...proposal} index={index} setCurrentProposal={setCurrentProposal} />
+                                    <ProposalItem key={index} proposal={proposal} index={index} setCurrentProposal={setCurrentProposal} />
                                 )
                             }
                         ) : <LoadingBouncer />
@@ -85,7 +91,32 @@ export default function Home() {
                 </div>
             </div>
             <div className={`${styles['detail-info-section']}`}>
-                <DetailInfoContainer currentProposal={currentProposal !== null ? proposalList[currentProposal] : null} />
+                <DetailInfoContainer currentProposal={currentProposal} />
+            </div>
+            <div className={`${styles['decision-tree-tag']}`} onClick={onDecisionTreeTagClicked} >
+                    <span>提案決策樹</span>
+                    {/* <Image src='/images/arrow_back.png' alt="backward arrow" width={24} height={24} /> */}
+            </div>
+            <div className={`${styles['decision-tree-container']} ${decisionTreeAppear ? styles['decision-tree-container-enabled'] : ''}`}>
+            {
+                initialProposal && (
+                    <div>
+                        {
+                            initialProposal.map(
+                                (proposal, index) => {
+                                    return (
+                                        <Draggable key={index}>
+                                            <div className={`${styles['decision-tree-proposal-name']}`}>
+                                                {proposal.name}
+                                            </div>
+                                        </Draggable>
+                                    )
+                                }
+                            )
+                        }
+                    </div>
+                )
+            }
             </div>
         </div>
     );
