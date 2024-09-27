@@ -5,15 +5,17 @@ import Image from "next/image"
 import ProposalItem from '@/components/ProposalItem'
 import DetailInfoContainer from '@/components/DetailInfoContainer'
 import FilterContainer from '@/components/FilterContainer'
+import LoadingBouncer from '@/components/LoadingBouncer'
 import { useState, useEffect, useContext } from 'react'
 import { FilterRuleContext } from '@/context/FilterRuleProvider'
-import { ProposalListContext, initialProposal } from '@/context/ProposalListProvider'
+import { ProposalListContext} from '@/context/ProposalListProvider'
+
 
 export default function Home() {
     const [currentProposal, setCurrentProposal] = useState(null)
     const [filterUIAppear, setFilterUIAppear] = useState(false)
     const { filterRule, setFilterRule, stringArrayFilterRule } = useContext(FilterRuleContext)
-    const { proposalList, setProposalList } = useContext(ProposalListContext)
+    const { proposalList, setProposalList, initialProposal } = useContext(ProposalListContext)
     useEffect(() => {
         console.log('filter effect triggered')
         if (!Object.values(filterRule).every(filterValue => filterValue === false) ||
@@ -47,7 +49,9 @@ export default function Home() {
             setProposalList([...filtered_proposal])
         } else {
             // reset proposals
-            setProposalList([...initialProposal])
+            if (initialProposal) {
+                setProposalList([...initialProposal])
+            }
         }
     }, [filterRule, setProposalList, stringArrayFilterRule])
 
@@ -70,13 +74,13 @@ export default function Home() {
                 <FilterContainer filterUIAppear={filterUIAppear} setFilterUIAppear={setFilterUIAppear} />
                 <div className={`${styles['proposal-items-container']}`}>
                     {
-                        proposalList.map(
+                        proposalList ? proposalList.map(
                             (proposal, index) => {
                                 return (
                                     <ProposalItem key={index} {...proposal} index={index} setCurrentProposal={setCurrentProposal} />
                                 )
                             }
-                        )
+                        ) : <LoadingBouncer />
                     }
                 </div>
             </div>

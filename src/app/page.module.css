@@ -17,6 +17,7 @@
     width: 40%;
     height: 100%;
     overflow-y: scroll;
+    position: relative;
     /* max-height: var(--proposal-list-height); */
 }
 
@@ -88,6 +89,7 @@
     flex-direction: column;
     align-items: flex-start;
 }
+
 
 .detail-info-section {
     margin: 0px;

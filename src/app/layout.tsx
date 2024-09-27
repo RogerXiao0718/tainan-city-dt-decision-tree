@@ -17,8 +17,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "臺南市政府數位雙生提案簡易決策樹",
-  description: "TainanCity Digital Twin Proposal Decision Tree",
+  title: "臺南市政府數位雙生提案簡易篩選",
+  description: "TainanCity Digital Twin Proposal Filtering",
 };
 
 export default function RootLayout({
