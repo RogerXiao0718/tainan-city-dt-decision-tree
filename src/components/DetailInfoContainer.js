@@ -1,5 +1,4 @@
 import styles from './DetailInfoContainer.module.css'
-import Image from 'next/image'
 import BooleanInfo from '@/components/BooleanInfo'
 
 export default function DetailInfoContainer({currentProposal}) {
@@ -7,7 +6,7 @@ export default function DetailInfoContainer({currentProposal}) {
     return (
         <div>
             {
-                (currentProposal !== null) && (
+                (currentProposal) && (
                     <div className={`${styles['detail-info-container']}`}>
                         <div className={`${styles['proposal-title-container']}`}>
                             {currentProposal.name}

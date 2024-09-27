@@ -5,120 +5,54 @@ import Image from "next/image"
 import ProposalItem from '@/components/ProposalItem'
 import DetailInfoContainer from '@/components/DetailInfoContainer'
 import FilterContainer from '@/components/FilterContainer'
-import { useState } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { FilterRuleContext } from '@/context/FilterRuleProvider'
+import { ProposalListContext, initialProposal } from '@/context/ProposalListProvider'
 
 export default function Home() {
-
-    const proposal_list = [
-        {
-            name: '博物展館三維建模結合室內展覽VR體驗',
-            departments: ['文化局'],
-            domain: ['文化', '觀光', '旅遊'],
-            doable: {
-                value: true,
-                note: ''
-            },
-            profitable: {
-                value: true,
-                note: ''
-            },
-            publicService: {
-                value: false,
-                note: ''
-            },
-            sustainable: {
-                value: true,
-                note: ''
-            },
-            deptCollab: {
-                value: true,
-                note: ''
-            },
-            crossCityCollab: {
-                value: false,
-                note: ''
-            },
-            internationalPromote: {
-                value: false,
-                note: ''
-            }
-
-        },
-        {
-            name: '數位雙生輔助線上觀光並輔助古蹟修繕',
-            departments: ['文化局'],
-            domain: ['文化', '觀光', '旅遊'],
-            doable: {
-                value: false,
-                note: ''
-            },
-            profitable: {
-                value: true,
-                note: ''
-            },
-            publicService: {
-                value: false,
-                note: ''
-            },
-            sustainable: {
-                value: true,
-                note: ''
-            },
-            deptCollab: {
-                value: true,
-                note: ''
-            },
-            crossCityCollab: {
-                value: false,
-                note: ''
-            },
-            internationalPromote: {
-                value: false,
-                note: ''
-            }
-
-        },
-        {
-            name: '商圈及老街建模結合VR環遊服務',
-            departments: ['觀光旅遊局'],
-            domain: ['文化', '觀光', '旅遊', '電商'],
-            doable: {
-                value: true,
-                note: ''
-            },
-            profitable: {
-                value: true,
-                note: ''
-            },
-            publicService: {
-                value: false,
-                note: ''
-            },
-            sustainable: {
-                value: true,
-                note: ''
-            },
-            deptCollab: {
-                value: true,
-                note: ''
-            },
-            crossCityCollab: {
-                value: false,
-                note: ''
-            },
-            internationalPromote: {
-                value: false,
-                note: ''
-            }
-
-        }
-    ]
-
     const [currentProposal, setCurrentProposal] = useState(null)
-    const [displayFilter, setDisplayFilter] = useState(false)
+    const [filterUIAppear, setFilterUIAppear] = useState(false)
+    const { filterRule, setFilterRule, stringArrayFilterRule } = useContext(FilterRuleContext)
+    const { proposalList, setProposalList } = useContext(ProposalListContext)
+    useEffect(() => {
+        console.log('filter effect triggered')
+        if (!Object.values(filterRule).every(filterValue => filterValue === false) ||
+            !Object.values(stringArrayFilterRule).every(filterValue => filterValue === '')
+            ) {
+            const filterRuleKeys = Object.keys(filterRule)
+            const DropDownFilterRuleKeys = Object.keys(stringArrayFilterRule)
+            console.log(filterRuleKeys)
+            // apply filter rule to proposal list
+            const filtered_proposal = initialProposal.filter((proposal) => {
+                let filterResult = true
+                for (const filterKey of filterRuleKeys) {
+                    if (filterRule[filterKey] === true) {
+                        if (proposal[filterKey].value === false) {
+                            filterResult = false
+                        }
+                    }
+                }
 
-    function onFilterImageClicked() {
-        setDisplayFilter(!displayFilter)
+                // drop down list filter rule
+                let dropDownFilterResult = true
+                for (const DropDownFilterRuleKey of DropDownFilterRuleKeys) {
+                    if (stringArrayFilterRule[DropDownFilterRuleKey] !== '') {
+                        if ( !proposal[DropDownFilterRuleKey].includes(stringArrayFilterRule[DropDownFilterRuleKey])) {
+                            dropDownFilterResult = false
+                        }
+                    }
+                }
+                return filterResult && dropDownFilterResult
+            })
+            setProposalList([...filtered_proposal])
+        } else {
+            // reset proposals
+            setProposalList([...initialProposal])
+        }
+    }, [filterRule, setProposalList, stringArrayFilterRule])
+
+    function onFilterUIAppearClicked() {
+        setFilterUIAppear(!filterUIAppear)
     }
 
     return (
@@ -130,13 +64,13 @@ export default function Home() {
                         <span>各局處提案</span>
                     </div>
                     <div className={`${styles['proposal-header-right']}`}>
-                        <Image  className={`${styles['filter-image']}`} src='/images/filter.png' onClick={onFilterImageClicked} width={30} height={30} alt='filter' />
+                        <Image className={`${styles['filter-image']}`} onClick={onFilterUIAppearClicked} src='/images/filter.png' width={30} height={30} alt='filter' />
                     </div>
                 </div>
-                <FilterContainer />
+                <FilterContainer filterUIAppear={filterUIAppear} setFilterUIAppear={setFilterUIAppear} />
                 <div className={`${styles['proposal-items-container']}`}>
                     {
-                        proposal_list.map(
+                        proposalList.map(
                             (proposal, index) => {
                                 return (
                                     <ProposalItem key={index} {...proposal} index={index} setCurrentProposal={setCurrentProposal} />
@@ -147,7 +81,7 @@ export default function Home() {
                 </div>
             </div>
             <div className={`${styles['detail-info-section']}`}>
-                <DetailInfoContainer currentProposal={currentProposal !== null ? proposal_list[currentProposal] : null} />
+                <DetailInfoContainer currentProposal={currentProposal !== null ? proposalList[currentProposal] : null} />
             </div>
         </div>
     );
