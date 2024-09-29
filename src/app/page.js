@@ -9,6 +9,7 @@ import LoadingBouncer from '@/components/LoadingBouncer'
 import { useState, useEffect, useContext } from 'react'
 import { FilterRuleContext } from '@/context/FilterRuleProvider'
 import { ProposalListContext} from '@/context/ProposalListProvider'
+import DecisionTree from '@/components/DecisionTree'
 import Draggable from "react-draggable"
 
 
@@ -99,23 +100,7 @@ export default function Home() {
             </div>
             <div className={`${styles['decision-tree-container']} ${decisionTreeAppear ? styles['decision-tree-container-enabled'] : ''}`}>
             {
-                initialProposal && (
-                    <div>
-                        {
-                            initialProposal.map(
-                                (proposal, index) => {
-                                    return (
-                                        <Draggable key={index}>
-                                            <div className={`${styles['decision-tree-proposal-name']}`}>
-                                                {proposal.name}
-                                            </div>
-                                        </Draggable>
-                                    )
-                                }
-                            )
-                        }
-                    </div>
-                )
+                initialProposal && <DecisionTree />
             }
             </div>
         </div>
