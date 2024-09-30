@@ -39,7 +39,8 @@
 import Tree from "react-d3-tree";
 import { REGULAR_NODE_SVG_STYLE } from "./helpers/tree";
 import styles from "./DecisionTree.module.css";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useContext, useRef, useState } from "react";
+import {ProposalListContext} from '@/context/ProposalListProvider'
 
 // This is a simplified example of an org chart with a depth of 2.
 // Note how deeper levels are defined recursively via the `children` property.
@@ -85,8 +86,19 @@ const TreeLayerData = [
   "公共服務",
   "永續經營",
   "跨機關合作",
+  "跨縣市合作",
   "國際推廣",
 ];
+
+const TreeLayerDataEn = [
+  'doable',
+  'profitable',
+  'publicService',
+  'sustainable',
+  'deptCollab',
+  'crossCityCollab',
+  'internationalPromote'
+]
 
 const addChild = (treeData, childData) => {
   return {
@@ -111,9 +123,72 @@ const createTreeData = (layerData, attributes = {}, depth = 0) => {
   return treeData;
 };
 
+const createHiddenNode = (name, children) => {
+  return {
+    name: name,
+    attributes: {
+      hidden: true
+    },
+    children: children
+  }
+}
+
+const createProposalNode = (proposal) => {
+  return {
+    name: proposal.name,
+    attributes: {
+      hidden: false
+    },
+    children: []
+  }
+}
+
+const createProposalTree = (proposalList, layerData, layerDataEn) => {
+  let treeData = {}
+  // for(const proposal in proposalList) {
+  //    treeData = createProposalTreeData(treeData, proposal, layerData, layerDataEn)
+  // }
+
+  // one proposal test
+  treeData = createProposalTreeData(treeData, treeData, proposalList[0], layerData, layerDataEn)
+
+  return treeData
+}
+
+const createProposalTreeData = (treeData, proposal, layerData, layerDataEn, depth=0, referenceNode=null) =>  {
+  // treeData['name'] = layerData[depth]
+  // treeData['attributes']
+  let currentTreeNode = {
+    name: layerData[depth],
+    attributes: {
+      hidden: false
+    },
+    children: []
+  }
+  const layerEnName = layerDataEn[depth]
+  
+  if (depth < layerData.length - 1) {
+    if (proposal[layerEnName].value === true) {
+      // add left hidden node
+      currentTreeNode = addChild(currentTreeNode,createHiddenNode(layerData[depth+1], []))
+      // add right visible node
+      currentTreeNode = addChild(currentTreeNode, createProposalTreeData(treeData, proposal, layerData, layerDataEn, depth+1))
+    } else {
+      // add left visible node
+      currentTreeNode = addChild(currentTreeNode, createProposalTreeData(treeData, proposal, layerData, layerDataEn, depth+1))
+      // add right hidden node
+      currentTreeNode = addChild(currentTreeNode, createHiddenNode(layerData[depth+1], []))
+    }
+  } else {
+    currentTreeNode = addChild(currentTreeNode, createProposalNode(proposal))
+  }
+
+  return currentTreeNode
+}
+
 function CustomNode({ nodeDatum, toggleNode }) {
 
-  const {} = nodeDatum.attributes
+  const {hidden} = nodeDatum.attributes
 
   useEffect(() => {
     if (nodeDatum.__rd3t.depth == 0) {
@@ -121,22 +196,22 @@ function CustomNode({ nodeDatum, toggleNode }) {
     }
   }, [nodeDatum.__rd3t.depth, toggleNode]);
   return (
-    <g className={`${styles["regular-node-svg"]}`}>
-      <circle onClick={() => toggleNode()} />
-      <text fill="black" strokeWidth="1" x="30" onClick={toggleNode}>
-        {nodeDatum.name}
-      </text>
-      {nodeDatum.__rd3t.depth !== TreeLayerData.length - 1 && (
-        <>
-          <text fill="#2ecc71" strokeWidth="0.1" x="45" dy="40">
-            Yes
-          </text>
-          <text fill="#e74c3c" strokeWidth="0.1" x="-50" dy="40">
-            No
-          </text>
-        </>
-      )}
-    </g>
+    (hidden === false )&& (<g className={`${styles["regular-node-svg"]}`}>
+    <circle onClick={() => toggleNode()} />
+    <text fill="black" strokeWidth="1" x="30" onClick={toggleNode}>
+      {nodeDatum.name}
+    </text>
+    {nodeDatum.__rd3t.depth !== TreeLayerData.length - 1 && (
+      <>
+        <text fill="#2ecc71" strokeWidth="0.1" x="45" dy="40">
+          Yes
+        </text>
+        <text fill="#e74c3c" strokeWidth="0.1" x="-50" dy="40">
+          No
+        </text>
+      </>
+    )}
+  </g>)
   );
 }
 
@@ -152,7 +227,12 @@ export default function DecisionTree() {
     height: 0,
   });
 
-  const [treeData, setTreeData] = useState(createTreeData(TreeLayerData));
+  const { proposalList } = useContext(ProposalListContext)
+  const [treeData, setTreeData] = useState({
+    name: '',
+    attributes: {},
+    children: []
+  });
 
   useEffect(() => {
     // console.log(containerRef.current.offsetWidth, containerRef.current.offsetHeight)
@@ -161,6 +241,13 @@ export default function DecisionTree() {
       height: containerRef.current.offsetHeight,
     });
   }, []);
+
+  useEffect(() => {
+    if (proposalList) {
+      setTreeData(createProposalTree(proposalList, TreeLayerData, TreeLayerDataEn))
+    }
+  }, [proposalList])
+
   return (
     // `<Tree />` will fill width/height of its container; in this case `#treeWrapper`.
     <div
