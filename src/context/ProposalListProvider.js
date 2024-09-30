@@ -6,6 +6,7 @@ export const ProposalListContext = createContext(null)
 export default function ProposalListProvider({children}) {
     const [initialProposal, setInitialProposal] = useState(null)
     const [proposalList, setProposalList] = useState(null)
+    const [currentProposal, setCurrentProposal] = useState(null)
     const proposalURL = '/data/proposalList.json'
     useEffect(() => {
         fetch(proposalURL)
@@ -17,7 +18,7 @@ export default function ProposalListProvider({children}) {
     }, [])
 
     return (
-        <ProposalListContext.Provider value={{initialProposal, proposalList, setProposalList}}>
+        <ProposalListContext.Provider value={{initialProposal, proposalList, setProposalList, currentProposal, setCurrentProposal}}>
             {children}
         </ProposalListContext.Provider>
     )

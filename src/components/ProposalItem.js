@@ -1,18 +1,36 @@
 import styles from './ProposalItem.module.css'
 import Image from 'next/image'
+import { useContext } from 'react';
+import { UIStateContext } from '@/context/UIStateProvider';
+import {ProposalListContext} from '@/context/ProposalListProvider'
 
 
 export default function ProposalItem(props) {
     const {proposal, setCurrentProposal} = props;
     const {name, departments} = proposal
+    const { setUIState} = useContext(UIStateContext)
+    const { currentProposal } = useContext(ProposalListContext)
 
     function onProposalItemClicked() {
         console.log(proposal)
         setCurrentProposal(proposal)
+        setUIState((uiState) => {
+            if (uiState.currentDisplaySection === 'detail' || uiState.currentDisplaySection === 'decision-tree') {
+                return {
+                    ...uiState,
+                    currentDisplaySection: 'detail'
+                }
+            } else {
+                return {
+                    ...uiState,
+                    currentDisplaySection: 'update'
+                }
+            }
+        })
     }
 
     return (
-        <div className={`${styles['proposal-item']}`} onClick={onProposalItemClicked}>
+        <div className={`${styles['proposal-item']} ${currentProposal === proposal ? styles['selected-proposal'] : ''}`} onClick={onProposalItemClicked}>
             <div className={`${styles['main-dept-name']}`}>
             {
                 departments && (

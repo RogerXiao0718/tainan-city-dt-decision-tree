@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import AppHeader from "@/components/AppHeader"
-import FilterRuleProvider from "@/context/FilterRuleProvider"
-import ProposalListProvider from "@/context/ProposalListProvider"
+import AppHeader from "@/components/AppHeader";
+import FilterRuleProvider from "@/context/FilterRuleProvider";
+import ProposalListProvider from "@/context/ProposalListProvider";
+import UIStateProvider from "@/context/UIStateProvider";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -31,13 +32,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ProposalListProvider>
-          <FilterRuleProvider>
-            <AppHeader />
-            {children}
-          </FilterRuleProvider>
-        </ProposalListProvider>
-        
+        <UIStateProvider>
+          <ProposalListProvider>
+            <FilterRuleProvider>
+              <AppHeader />
+              {children}
+            </FilterRuleProvider>
+          </ProposalListProvider>
+        </UIStateProvider>
       </body>
     </html>
   );

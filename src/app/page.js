@@ -8,22 +8,24 @@ import FilterContainer from '@/components/FilterContainer'
 import LoadingBouncer from '@/components/LoadingBouncer'
 import { useState, useEffect, useContext } from 'react'
 import { FilterRuleContext } from '@/context/FilterRuleProvider'
-import { ProposalListContext} from '@/context/ProposalListProvider'
+import { ProposalListContext } from '@/context/ProposalListProvider'
+import { UIStateContext } from "@/context/UIStateProvider"
 import DecisionTree from '@/components/DecisionTree'
-import Draggable from "react-draggable"
-
+import UpdateProposalContainer from '@/components/UpdateProposalContainer'
 
 export default function Home() {
-    const [currentProposal, setCurrentProposal] = useState(null)
+    // const [currentProposal, setCurrentProposal] = useState(null)
     const [filterUIAppear, setFilterUIAppear] = useState(false)
     const [decisionTreeAppear, setDecisionTreeAppear] = useState(false)
     const { filterRule, setFilterRule, stringArrayFilterRule } = useContext(FilterRuleContext)
-    const { proposalList, setProposalList, initialProposal } = useContext(ProposalListContext)
+    const { proposalList, setProposalList, currentProposal, setCurrentProposal, initialProposal } = useContext(ProposalListContext)
+    const { uiState, setUIState } = useContext(UIStateContext)
+    const { currentDisplaySection } = uiState
     useEffect(() => {
         console.log('filter effect triggered')
         if (!Object.values(filterRule).every(filterValue => filterValue === false) ||
             !Object.values(stringArrayFilterRule).every(filterValue => filterValue === '')
-            ) {
+        ) {
             const filterRuleKeys = Object.keys(filterRule)
             const DropDownFilterRuleKeys = Object.keys(stringArrayFilterRule)
             console.log(filterRuleKeys)
@@ -42,7 +44,7 @@ export default function Home() {
                 let dropDownFilterResult = true
                 for (const DropDownFilterRuleKey of DropDownFilterRuleKeys) {
                     if (stringArrayFilterRule[DropDownFilterRuleKey] !== '') {
-                        if ( !proposal[DropDownFilterRuleKey].includes(stringArrayFilterRule[DropDownFilterRuleKey])) {
+                        if (!proposal[DropDownFilterRuleKey].includes(stringArrayFilterRule[DropDownFilterRuleKey])) {
                             dropDownFilterResult = false
                         }
                     }
@@ -62,8 +64,32 @@ export default function Home() {
         setFilterUIAppear(!filterUIAppear)
     }
 
+    function onDetailTagClicked() {
+        setUIState((uiState) => {
+            return {
+                ...uiState,
+                currentDisplaySection: 'detail'
+            }
+        })
+    }
+
     function onDecisionTreeTagClicked() {
-        setDecisionTreeAppear(!decisionTreeAppear)
+        // setDecisionTreeAppear(!decisionTreeAppear)
+        setUIState((uiState) => {
+            return {
+                ...uiState,
+                currentDisplaySection: 'decision-tree'
+            }
+        })
+    }
+
+    function onUpdateProposalTagClicked() {
+        setUIState((uiState) => {
+            return {
+                ...uiState,
+                currentDisplaySection: 'update'
+            }
+        })
     }
 
     return (
@@ -91,17 +117,28 @@ export default function Home() {
                     }
                 </div>
             </div>
-            <div className={`${styles['detail-info-section']}`}>
+            <div className={`${styles['side-tag']} ${styles['detail-tag']}`} onClick={onDetailTagClicked}>
+                <span>
+                    提案資訊
+                </span>
+            </div>
+            <div className={`${styles['side-tag']} ${styles['decision-tree-tag']}`} onClick={onDecisionTreeTagClicked} >
+                <span>提案決策樹</span>
+                {/* <Image src='/images/arrow_back.png' alt="backward arrow" width={24} height={24} /> */}
+            </div>
+            <div className={`${styles['side-tag']} ${styles['update-proposal-tag']}`} onClick={onUpdateProposalTagClicked}>
+                <span>更新提案</span>
+            </div>
+            <div className={`${styles['detail-info-section']} ${currentDisplaySection === 'detail' ? styles['detail-info-section-enabled'] : ''}`}>
                 <DetailInfoContainer currentProposal={currentProposal} />
             </div>
-            <div className={`${styles['decision-tree-tag']}`} onClick={onDecisionTreeTagClicked} >
-                    <span>提案決策樹</span>
-                    {/* <Image src='/images/arrow_back.png' alt="backward arrow" width={24} height={24} /> */}
+            <div className={`${styles['decision-tree-container']} ${currentDisplaySection === 'decision-tree' ? styles['decision-tree-container-enabled'] : ''}`}>
+                {
+                    initialProposal && <DecisionTree />
+                }
             </div>
-            <div className={`${styles['decision-tree-container']} ${decisionTreeAppear ? styles['decision-tree-container-enabled'] : ''}`}>
-            {
-                initialProposal && <DecisionTree />
-            }
+            <div className={`${styles['update-section-container']} ${currentDisplaySection === 'update' ? styles['update-section-container-enabled'] : ''}`}>
+                <UpdateProposalContainer currentProposal={currentProposal} />
             </div>
         </div>
     );

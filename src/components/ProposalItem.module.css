@@ -13,6 +13,10 @@
     position: relative;
 }
 
+.selected-proposal {
+    background-color: #95a5a6;
+}
+
 .proposal-item:hover {
     /* background-color: #74b9ff; */
     background-color: #dfe6e9;

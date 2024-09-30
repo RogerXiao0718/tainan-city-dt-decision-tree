@@ -51,6 +51,10 @@
     fill: #e74c3c;
 }
 
+.empty-node > circle:hover {
+    fill: #c0392b;
+}
+
 /* export const REGULAR_NODE_SVG_STYLE = {
     shape: 'circle',
     shapeProps: {

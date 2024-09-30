@@ -365,7 +365,7 @@
             "note": ""
         },
         "publicService": {
-            "value": false,
+            "value": true,
             "note": ""
         },
         "sustainable": {
