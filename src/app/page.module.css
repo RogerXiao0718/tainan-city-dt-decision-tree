@@ -120,11 +120,12 @@
     right: -100%;
     width: 60%;
     z-index: 2;
-    background-color: #777;
     height: var(--decision-tree-container-height);
     transition: all .2s;
-    
+    background-color: white;
 }
+
+
 
 .decision-tree-container-enabled {
     right: 0px;

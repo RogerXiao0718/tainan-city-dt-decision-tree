@@ -16,6 +16,13 @@
     height: 100%;
 }
 
+.container-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-top: 20px;
+}
+
 .regular-node-svg > circle{
     fill: #3498db;
     r: 20;
@@ -26,6 +33,18 @@
 .regular-node-svg > circle:hover{
     fill: #2980b9
 
+}
+
+.proposal-node > circle{
+    fill: #2ecc71
+}
+
+.proposal-node > circle:hover{
+    fill: #27ae60
+}
+
+.proposal-text {
+    width: 80px;
 }
 
 /* export const REGULAR_NODE_SVG_STYLE = {
