@@ -112,26 +112,27 @@ const addChild = (treeData, childData) => {
   };
 };
 
-const createTreeData = (layerData, attributes = {}, depth = 0) => {
-  let treeData = {
-    name: layerData[depth],
-    attributes: attributes,
-    children: [],
-  };
-  if (depth < layerData.length - 1) {
-    //add left child
-    treeData = addChild(treeData, createTreeData(layerData, {}, depth + 1));
-    //add right child
-    treeData = addChild(treeData, createTreeData(layerData, {}, depth + 1));
-  }
+// const createTreeData = (layerData, attributes = {}, depth = 0) => {
+//   let treeData = {
+//     name: layerData[depth],
+//     attributes: attributes,
+//     children: [],
+//   };
+//   if (depth < layerData.length - 1) {
+//     //add left child
+//     treeData = addChild(treeData, createTreeData(layerData, {}, depth + 1));
+//     //add right child
+//     treeData = addChild(treeData, createTreeData(layerData, {}, depth + 1));
+//   }
 
-  return treeData;
-};
+//   return treeData;
+// };
 
-const createHiddenNode = (name, children) => {
+const createHiddenNode = (name, children, attributes={}) => {
   return {
     name: name,
     attributes: {
+      ...attributes,
       hidden: true
     },
     children: children
@@ -142,6 +143,7 @@ const displayHiddenData = (treeNode) => {
   return {
     ...treeNode,
     attributes: {
+      ...treeNode.attributes,
       hidden: false
     }
   }
@@ -161,7 +163,7 @@ const createProposalNode = (proposal) => {
 const createProposalTree = (proposalList, layerData, layerDataEn) => {
   let treeData = {}
   let index = 0
-  
+
   if (proposalList.length !== 0) {
     for (const proposal of proposalList) {
       const referenceNode = (index === 0 ? null : treeData)
@@ -169,7 +171,6 @@ const createProposalTree = (proposalList, layerData, layerDataEn) => {
       index += 1
     }
   } else {
-    console.log('empty proposal list', proposalList)
     return {
       name: '',
       attributes: {},
@@ -185,19 +186,34 @@ const createProposalTree = (proposalList, layerData, layerDataEn) => {
 
 const createProposalTreeData = (treeData, proposal, layerData, layerDataEn, depth = 0, referenceNode = null) => {
 
+  const isProposal = (depth < layerData.length ? false : true)
   let currentTreeNode = {
     name: layerData[depth],
     attributes: {
-      hidden: false
+      hidden: false,
+      isProposal: isProposal
     },
     children: []
   }
 
-  const { LEFT_NODE, RIGHT_NODE } = TreeConstantProps
-
   const layerEnName = layerDataEn[depth]
 
-  if (depth < layerData.length - 1) {
+  if (proposal.name === '商圈及老街建模結合VR環遊服務') {
+    console.log('商圈debug', depth, layerEnName, proposal)
+    console.log(isProposal)
+  }
+
+  const { LEFT_NODE, RIGHT_NODE } = TreeConstantProps
+
+  // if (proposal.name === '數位雙生輔助交通治理') {
+  //   console.log('debug hidden state: ',  depth)
+  //   console.log('depth', depth, 'layerData.length - 1', layerData.length - 1)
+  // }
+
+  if (depth < layerData.length) {
+    // if (proposal.name === '數位雙生輔助交通治理') {
+    //   console.log('debug hidden state: ',  depth)
+    // }
     if (referenceNode && referenceNode.children.length >= 2) {
       let leftChild = referenceNode.children[LEFT_NODE]
       let rightChild = referenceNode.children[RIGHT_NODE]
@@ -205,13 +221,13 @@ const createProposalTreeData = (treeData, proposal, layerData, layerDataEn, dept
       if (proposal[layerEnName].value === true) {
         // right Node
         if (rightChild.attributes.hidden === true) {
-          referenceNode.children[RIGHT_NODE] = displayHiddenData(rightChild)
+          rightChild = displayHiddenData(rightChild)
         }
         referenceNode.children[RIGHT_NODE] = createProposalTreeData(treeData, proposal, layerData, layerDataEn, depth + 1, rightChild)
       } else {
         // left Node
         if (leftChild.attributes.hidden === true) {
-          referenceNode.children[LEFT_NODE] = displayHiddenData(leftChild)
+          leftChild = displayHiddenData(leftChild)
         }
         referenceNode.children[LEFT_NODE] = createProposalTreeData(treeData, proposal, layerData, layerDataEn, depth + 1, leftChild)
       }
@@ -219,24 +235,24 @@ const createProposalTreeData = (treeData, proposal, layerData, layerDataEn, dept
     } else {
       if (proposal[layerEnName].value === true) {
         // add left hidden node
-        currentTreeNode = addChild(currentTreeNode, createHiddenNode(layerData[depth + 1], []))
+        currentTreeNode = addChild(currentTreeNode, createHiddenNode(layerData[depth + 1], [], {isProposal: (depth + 1 < layerData.length ? false : true)}))
         // add right visible node
         currentTreeNode = addChild(currentTreeNode, createProposalTreeData(treeData, proposal, layerData, layerDataEn, depth + 1))
       } else {
         // add left visible node
         currentTreeNode = addChild(currentTreeNode, createProposalTreeData(treeData, proposal, layerData, layerDataEn, depth + 1))
         // add right hidden node
-        currentTreeNode = addChild(currentTreeNode, createHiddenNode(layerData[depth + 1], []))
+        currentTreeNode = addChild(currentTreeNode, createHiddenNode(layerData[depth + 1], [], {isProposal: (depth + 1 < layerData.length ? false : true)}))
       }
       return currentTreeNode
     }
-
-
-  } else {
+  } 
+  else {
     if (referenceNode) {
       referenceNode = addChild(referenceNode, createProposalNode(proposal))
       return referenceNode
     } else {
+      // currentTreeNode is new treeNode
       currentTreeNode = addChild(currentTreeNode, createProposalNode(proposal))
       return currentTreeNode
     }
@@ -246,17 +262,19 @@ const createProposalTreeData = (treeData, proposal, layerData, layerDataEn, dept
 }
 
 function CustomNode({ nodeDatum, toggleNode }) {
-
-  console.log('nodeDatum', nodeDatum)
   const { hidden, isProposal } = nodeDatum.attributes
   const { name } = nodeDatum
   const textChunkSize = 6
   const nameChunkList = []
-  if (nodeDatum.attributes.isProposal === true) {
+  if (nodeDatum.attributes.isProposal === true && name) {
     for (let i = 0; i < name.length; i += textChunkSize) {
       const chunk = name.slice(i, i + textChunkSize);
       nameChunkList.push(chunk)
+    }
   }
+
+  if (name === '國際推廣') {
+    console.log('國際推廣Node', nodeDatum)
   }
 
   useEffect(() => {
@@ -265,7 +283,7 @@ function CustomNode({ nodeDatum, toggleNode }) {
     }
   }, [nodeDatum.__rd3t.depth, toggleNode]);
   return (
-    (hidden === false) && (<g className={`${styles["regular-node-svg"]} ${isProposal ? styles['proposal-node'] : ''}`}>
+    (hidden === false) && (<g className={`${styles["regular-node-svg"]} ${isProposal ? styles['proposal-node'] : ''} ${name ? '' : styles['empty-node'] }`}>
       <circle onClick={() => toggleNode()} />
       {
         isProposal ? (
@@ -284,7 +302,7 @@ function CustomNode({ nodeDatum, toggleNode }) {
           </text>
         )
       }
-      {(nodeDatum.__rd3t.depth !== TreeLayerData.length - 1) && (
+      {(
         !isProposal && (
           <>
             <text fill="#2ecc71" strokeWidth="0.1" x="45" dy="40">

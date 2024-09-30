@@ -17,7 +17,7 @@
 }
 
 .container-title {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     color: #2c3e50;
     margin-top: 20px;
@@ -45,6 +45,10 @@
 
 .proposal-text {
     width: 80px;
+}
+
+.empty-node > circle {
+    fill: #e74c3c;
 }
 
 /* export const REGULAR_NODE_SVG_STYLE = {
