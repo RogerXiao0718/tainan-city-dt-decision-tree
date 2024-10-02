@@ -12,21 +12,15 @@ export default function ProposalItem(props) {
     const { currentProposal } = useContext(ProposalListContext)
 
     function onProposalItemClicked() {
-        console.log(proposal)
         setCurrentProposal(proposal)
-        setUIState((uiState) => {
-            if (uiState.currentDisplaySection === 'detail' || uiState.currentDisplaySection === 'decision-tree') {
-                return {
-                    ...uiState,
-                    currentDisplaySection: 'detail'
-                }
-            } else {
-                return {
-                    ...uiState,
-                    currentDisplaySection: 'update'
-                }
-            }
-        })
+        // setUIState((uiState) => {
+        //     if (uiState.currentDisplaySection === 'detail') {
+        //         return {
+        //             ...uiState,
+        //             currentDisplaySection: 'detail'
+        //         }
+        //     } 
+        // })
     }
 
     return (

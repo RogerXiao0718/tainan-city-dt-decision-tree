@@ -2,7 +2,6 @@ import styles from './DetailInfoContainer.module.css'
 import BooleanInfo from '@/components/BooleanInfo'
 
 export default function DetailInfoContainer({currentProposal}) {
-    console.log('DetailInfo', currentProposal)
     return (
         <div>
             {

@@ -4,12 +4,14 @@ import ToggleButton from '@/components/ToggleButton'
 import { useContext } from 'react'
 import { FilterRuleContext } from '@/context/FilterRuleProvider'
 
+export const deptOptionList = ['', '文化局', '觀光旅遊局', '經濟發展局', '體育局', '都市發展局', '交通局', '消防局', '水利局', '工務局']
+export const domainOptionList = ['', '娛樂', '電商', '學習', '運動科技', '文化', '動畫', '影視', '觀光', '旅遊', '賽事', '展演', '公共服務']
+
 export default function FilterContainer(props) {
 
     const {filterUIAppear, setFilterUIAppear} = props
     const { filterRule, setFilterRule, stringArrayFilterRule, setStringArrayFilterRule } = useContext(FilterRuleContext)
-    const deptOptionList = ['', '文化局', '觀光旅遊局', '經濟發展局', '體育局', '都市發展局', '交通局', '消防局', '水利局', '工務局']
-    const domainOptionList = ['', '娛樂', '電商', '學習', '運動科技', '文化', '動畫', '影視', '觀光', '旅遊', '賽事', '展演', '公共服務']
+    
 
     function ToggleButtonCallbackGenerator(ruleName, setStateFunction) {
         return () => {

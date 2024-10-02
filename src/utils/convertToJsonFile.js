@@ -404,7 +404,6 @@ const proposalList = [
 
 const convertToJson = () => {
     const proposal_json = JSON.stringify(proposalList)
-    console.log(proposal_json)
     fs.writeFile('../data/proposalList.json', proposal_json, 'utf8', (err, _) => {
         if (err) {
             console.log(err)

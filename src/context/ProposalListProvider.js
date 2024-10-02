@@ -18,7 +18,7 @@ export default function ProposalListProvider({children}) {
     }, [])
 
     return (
-        <ProposalListContext.Provider value={{initialProposal, proposalList, setProposalList, currentProposal, setCurrentProposal}}>
+        <ProposalListContext.Provider value={{initialProposal, setInitialProposal, proposalList, setProposalList, currentProposal, setCurrentProposal}}>
             {children}
         </ProposalListContext.Provider>
     )
