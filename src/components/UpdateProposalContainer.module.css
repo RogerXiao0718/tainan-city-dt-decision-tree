@@ -9,7 +9,7 @@
 
 .update-form-container {
     width: 60%;
-    height: 80%;
+    height: 540px;
     border-radius: 5%;
     border: 2px solid #2c3e50;
     display: flex;
@@ -29,7 +29,7 @@
     color: #e74c3c;
     font-weight: bold;
     font-size: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .selector-row-container {
@@ -89,7 +89,7 @@
     width: 100%;
     flex-direction: column;
     justify-content: flex-start;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 .options-row {
@@ -124,12 +124,12 @@
     flex-direction: row;
     justify-content: center;
     align-items:center;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 .submit-button {
-    width: 120px;
-    height: 50px;
+    width: 100px;
+    height: 40px;
     background-color: #3498db;
     border: none;
     border-radius: 6px;
