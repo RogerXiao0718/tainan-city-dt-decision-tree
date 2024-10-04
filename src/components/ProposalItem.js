@@ -1,26 +1,17 @@
 import styles from './ProposalItem.module.css'
 import Image from 'next/image'
 import { useContext } from 'react';
-import { UIStateContext } from '@/context/UIStateProvider';
 import {ProposalListContext} from '@/context/ProposalListProvider'
 
 
 export default function ProposalItem(props) {
     const {proposal, setCurrentProposal} = props;
     const {name, departments} = proposal
-    const { setUIState} = useContext(UIStateContext)
     const { currentProposal } = useContext(ProposalListContext)
 
     function onProposalItemClicked() {
         setCurrentProposal(proposal)
-        // setUIState((uiState) => {
-        //     if (uiState.currentDisplaySection === 'detail') {
-        //         return {
-        //             ...uiState,
-        //             currentDisplaySection: 'detail'
-        //         }
-        //     } 
-        // })
+
     }
 
     return (
