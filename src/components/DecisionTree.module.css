@@ -36,11 +36,11 @@
 }
 
 .proposal-node > circle{
-    fill: #2ecc71
+    fill: #f1c40f
 }
 
 .proposal-node > circle:hover{
-    fill: #27ae60
+    fill: #f39c12
 }
 
 .proposal-text {
@@ -53,6 +53,14 @@
 
 .empty-node > circle:hover {
     fill: #c0392b;
+}
+
+.great-proposal-node > circle {
+    fill: #2ecc71
+}
+
+.great-proposal-node > circle:hover{
+    fill: #27ae60
 }
 
 /* export const REGULAR_NODE_SVG_STYLE = {

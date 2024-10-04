@@ -65,6 +65,7 @@ const createProposalNode = (proposal) => {
     attributes: {
       hidden: false,
       isProposal: true,
+      ...proposal
     },
     children: [],
   };
@@ -212,7 +213,8 @@ const createProposalTreeData = (
 
 function CustomNode({ nodeDatum, toggleNode }) {
   const {currentProposal} = useContext(ProposalListContext)
-  const { hidden, isProposal } = nodeDatum.attributes;
+  const { hidden, isProposal, doable, profitable } = nodeDatum.attributes;
+
   const { name } = nodeDatum;
   const textChunkSize = 6;
   const nameChunkList = [];
@@ -233,7 +235,7 @@ function CustomNode({ nodeDatum, toggleNode }) {
       <g
         className={`${styles["regular-node-svg"]} ${
           isProposal ? styles["proposal-node"] : ""
-        } ${name ? "" : styles["empty-node"]}`}
+        } ${name ? "" : styles["empty-node"]} ${doable && profitable && doable.value && profitable.value ? styles["great-proposal-node"] : "" }`}
       >
         <circle onClick={() => toggleNode()} />
         {isProposal ? (
@@ -244,10 +246,11 @@ function CustomNode({ nodeDatum, toggleNode }) {
             x="-50"
             y="40"
             onClick={toggleNode}
+            font-size={20}
           >
             {nameChunkList.map((chunk, i) => {
               return (
-                <tspan key={i} x="-40" dy="1.2em">
+                <tspan key={i} x="-50" dy="1.2em">
                   {chunk}
                 </tspan>
               );
