@@ -7,6 +7,37 @@ export default function ProposalListProvider({children}) {
     const [initialProposal, setInitialProposal] = useState(null)
     const [proposalList, setProposalList] = useState(null)
     const [currentProposal, setCurrentProposal] = useState(null)
+    const [currentDecisionList, setCurrentDecisionList] = useState([
+        {
+            en: 'doable',
+            ch: '可行性'
+        },
+        {
+            en: 'profitable',
+            ch: '商轉效益'
+        },
+        {
+            en: 'publicService',
+            ch: '公共服務'
+        },
+        {
+            en: 'sustainable',
+            ch: '永續經營'
+        },
+        {
+            en: 'deptCollab',
+            ch: '跨機關合作'
+        },
+        {
+            en: 'crossCityCollab',
+            ch: '跨縣市合作'
+        },
+        {
+            en: 'internationalPromote',
+            ch: '國際推廣'
+        }
+    ])
+    
     const proposalURL = '/data/proposalList.json'
     useEffect(() => {
         fetch(proposalURL)
@@ -18,7 +49,7 @@ export default function ProposalListProvider({children}) {
     }, [])
 
     return (
-        <ProposalListContext.Provider value={{initialProposal, setInitialProposal, proposalList, setProposalList, currentProposal, setCurrentProposal}}>
+        <ProposalListContext.Provider value={{initialProposal, setInitialProposal, proposalList, setProposalList, currentProposal, setCurrentProposal, currentDecisionList, setCurrentDecisionList}}>
             {children}
         </ProposalListContext.Provider>
     )

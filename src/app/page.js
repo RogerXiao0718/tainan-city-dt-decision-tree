@@ -5,6 +5,7 @@ import Image from "next/image";
 import ProposalItem from "@/components/ProposalItem";
 import DetailInfoContainer from "@/components/DetailInfoContainer";
 import FilterContainer from "@/components/FilterContainer";
+import DecisionOrderContainer from "@/components/DecisionOrderContainer"
 import LoadingBouncer from "@/components/LoadingBouncer";
 import { useState, useEffect, useContext } from "react";
 import { FilterRuleContext } from "@/context/FilterRuleProvider";

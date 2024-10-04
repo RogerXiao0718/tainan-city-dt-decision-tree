@@ -1,0 +1,34 @@
+.decision-order-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    background-color: #777;
+}
+
+.decision-order-title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.decision-order-title {
+    font-size: 18px;
+    color: white;  
+}
+
+.order-list-container {
+    width: 100%;
+}
+
+.decision-order-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+}

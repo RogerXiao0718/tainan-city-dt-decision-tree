@@ -102,3 +102,64 @@
 .close-filter-btn:hover {
     background-color: #c0392b;
 }
+
+.decision-order-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.decision-order-title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.decision-order-title {
+    padding: 6px 10px;
+    background-color: #c0392b;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.order-list-container {
+    width: 100%;
+}
+
+.decision-order-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 6px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 10%
+}
+
+.order-number {
+    margin-right: 30px;
+}
+
+.decision-ch-title {
+    margin-right: 30px;
+    width: 100px;
+}
+
+.order-select {
+    width: 50px;
+    height: 24px;
+    text-align: center;
+    border-radius: 12px;
+    /* border: none; */
+    /* background-color: #95a5a6; */
+    box-shadow: 0px 0px 3px 0px #2c3e50;
+}
