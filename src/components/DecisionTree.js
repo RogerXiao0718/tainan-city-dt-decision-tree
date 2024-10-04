@@ -3,28 +3,28 @@
 import Tree from "react-d3-tree";
 import { REGULAR_NODE_SVG_STYLE } from "./helpers/tree";
 import styles from "./DecisionTree.module.css";
-import { useEffect, useContext, useRef, useState } from "react";
+import { useEffect, useContext, useRef, useState, useMemo } from "react";
 import { ProposalListContext } from "@/context/ProposalListProvider";
 
-const TreeLayerData = [
-  "可行性",
-  "商轉價值",
-  "公共服務",
-  "永續經營",
-  "跨機關合作",
-  "跨縣市合作",
-  "國際推廣",
-];
+// const TreeLayerData = [
+//   "可行性",
+//   "商轉價值",
+//   "公共服務",
+//   "永續經營",
+//   "跨機關合作",
+//   "跨縣市合作",
+//   "國際推廣",
+// ];
 
-const TreeLayerDataEn = [
-  "doable",
-  "profitable",
-  "publicService",
-  "sustainable",
-  "deptCollab",
-  "crossCityCollab",
-  "internationalPromote",
-];
+// const TreeLayerDataEn = [
+//   "doable",
+//   "profitable",
+//   "publicService",
+//   "sustainable",
+//   "deptCollab",
+//   "crossCityCollab",
+//   "internationalPromote",
+// ];
 
 const TreeConstantProps = {
   LEFT_NODE: 0,
@@ -212,9 +212,15 @@ const createProposalTreeData = (
 };
 
 function CustomNode({ nodeDatum, toggleNode }) {
-  const {currentProposal} = useContext(ProposalListContext)
-  const { hidden, isProposal, doable, profitable } = nodeDatum.attributes;
-
+  const {currentProposal, currentDecisionList} = useContext(ProposalListContext)
+  const {attributes} = nodeDatum
+  const { hidden, isProposal } = attributes;
+  const {topLayerName, secondLayerName} = useMemo(() => {
+    return {
+      topLayerName: currentDecisionList[0].en,
+      secondLayerName: currentDecisionList[1].en
+    }
+  }, [currentDecisionList])
   const { name } = nodeDatum;
   const textChunkSize = 6;
   const nameChunkList = [];
@@ -235,7 +241,7 @@ function CustomNode({ nodeDatum, toggleNode }) {
       <g
         className={`${styles["regular-node-svg"]} ${
           isProposal ? styles["proposal-node"] : ""
-        } ${name ? "" : styles["empty-node"]} ${doable && profitable && doable.value && profitable.value ? styles["great-proposal-node"] : "" }`}
+        } ${name ? "" : styles["empty-node"]} ${attributes[topLayerName] && attributes[secondLayerName] && attributes[topLayerName].value && attributes[secondLayerName].value ? styles["great-proposal-node"] : "" }`}
       >
         <circle onClick={() => toggleNode()} />
         {isProposal ? (
@@ -288,7 +294,13 @@ export default function DecisionTree() {
     height: 0,
   });
 
-  const { proposalList } = useContext(ProposalListContext);
+  const { proposalList, currentDecisionList } = useContext(ProposalListContext);
+  const TreeLayerData = useMemo(() => {
+    return currentDecisionList.map(decision => decision.ch)
+  }, [currentDecisionList])
+  const TreeLayerDataEn = useMemo(() => {
+    return currentDecisionList.map(decision => decision.en)
+  }, [currentDecisionList])
   const [treeData, setTreeData] = useState({
     name: "",
     attributes: {},
@@ -308,7 +320,7 @@ export default function DecisionTree() {
         createProposalTree(proposalList, TreeLayerData, TreeLayerDataEn)
       );
     }
-  }, [proposalList]);
+  }, [TreeLayerData, TreeLayerDataEn, proposalList]);
 
   return (
     <div

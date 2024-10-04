@@ -17,8 +17,7 @@ import UpdateFieldProvider from "@/context/UpdateFieldProvider";
 
 export default function Home() {
   // const [currentProposal, setCurrentProposal] = useState(null)
-  const [filterUIAppear, setFilterUIAppear] = useState(false);
-  const [decisionTreeAppear, setDecisionTreeAppear] = useState(false);
+  
   const { filterRule, setFilterRule, stringArrayFilterRule } =
     useContext(FilterRuleContext);
   const {
@@ -29,7 +28,7 @@ export default function Home() {
     initialProposal,
   } = useContext(ProposalListContext);
   const { uiState, setUIState } = useContext(UIStateContext);
-  const { currentDisplaySection } = uiState;
+  const { currentDisplaySection, filterUIAppear, decisionOrderUIAppear } = uiState;
   useEffect(() => {
     if (
       !Object.values(filterRule).every(
@@ -77,7 +76,23 @@ export default function Home() {
   }, [filterRule, initialProposal, setProposalList, stringArrayFilterRule]);
 
   function onFilterUIAppearClicked() {
-    setFilterUIAppear(!filterUIAppear);
+    setUIState((uiState) => {
+      return {
+        ...uiState,
+        filterUIAppear: !uiState.filterUIAppear,
+        decisionOrderUIAppear: false
+      }
+    });
+  }
+
+  function onDecisionOrderUIClicked() {
+    setUIState((uiState) => {
+      return {
+        ...uiState,
+        decisionOrderUIAppear: !uiState.decisionOrderUIAppear,
+        filterUIAppear: false
+      }
+    });
   }
 
   function onDetailTagClicked() {
@@ -122,6 +137,14 @@ export default function Home() {
             <span>各局處提案</span>
           </div>
           <div className={`${styles["proposal-header-right"]}`}>
+          <Image
+              className={`${styles["filter-image"]}`}
+              onClick={onDecisionOrderUIClicked}
+              src="/images/network_node.png"
+              width={30}
+              height={30}
+              alt="order"
+            />
             <Image
               className={`${styles["filter-image"]}`}
               onClick={onFilterUIAppearClicked}
@@ -132,10 +155,8 @@ export default function Home() {
             />
           </div>
         </div>
-        <FilterContainer
-          filterUIAppear={filterUIAppear}
-          setFilterUIAppear={setFilterUIAppear}
-        />
+        <DecisionOrderContainer />
+        <FilterContainer />
         <div className={`${styles["proposal-items-container"]}`}>
           {proposalList ? (
             proposalList.map((proposal, index) => {

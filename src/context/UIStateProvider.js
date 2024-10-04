@@ -5,6 +5,8 @@ export const UIStateContext = createContext()
 
 const initialUIState = {
     currentDisplaySection: 'detail',  // 'detail' | 'decision-tree' | 'update'
+    filterUIAppear: false,
+    decisionOrderUIAppear: false
 }
 
 export default function UIStateProvider({children}) {

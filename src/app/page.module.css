@@ -58,6 +58,7 @@
     padding: 4px;
     border-radius: 50%;
     transition: .2s;
+    margin-right: 10px;
 }
 
 .filter-image:hover {
