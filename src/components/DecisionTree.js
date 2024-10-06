@@ -6,26 +6,6 @@ import styles from "./DecisionTree.module.css";
 import { useEffect, useContext, useRef, useState, useMemo } from "react";
 import { ProposalListContext } from "@/context/ProposalListProvider";
 
-// const TreeLayerData = [
-//   "可行性",
-//   "商轉價值",
-//   "公共服務",
-//   "永續經營",
-//   "跨機關合作",
-//   "跨縣市合作",
-//   "國際推廣",
-// ];
-
-// const TreeLayerDataEn = [
-//   "doable",
-//   "profitable",
-//   "publicService",
-//   "sustainable",
-//   "deptCollab",
-//   "crossCityCollab",
-//   "internationalPromote",
-// ];
-
 const TreeConstantProps = {
   LEFT_NODE: 0,
   RIGHT_NODE: 1,

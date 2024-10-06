@@ -5,7 +5,7 @@ import Image from "next/image";
 import ProposalItem from "@/components/ProposalItem";
 import DetailInfoContainer from "@/components/DetailInfoContainer";
 import FilterContainer from "@/components/FilterContainer";
-import DecisionOrderContainer from "@/components/DecisionOrderContainer"
+import DecisionOrderContainer from "@/components/DecisionOrderContainer";
 import LoadingBouncer from "@/components/LoadingBouncer";
 import { useState, useEffect, useContext } from "react";
 import { FilterRuleContext } from "@/context/FilterRuleProvider";
@@ -17,7 +17,7 @@ import UpdateFieldProvider from "@/context/UpdateFieldProvider";
 
 export default function Home() {
   // const [currentProposal, setCurrentProposal] = useState(null)
-  
+
   const { filterRule, setFilterRule, stringArrayFilterRule } =
     useContext(FilterRuleContext);
   const {
@@ -28,7 +28,7 @@ export default function Home() {
     initialProposal,
   } = useContext(ProposalListContext);
   const { uiState, setUIState } = useContext(UIStateContext);
-  const { currentDisplaySection, filterUIAppear, decisionOrderUIAppear } = uiState;
+  const { currentDisplaySection, leftPanelUIAppear } = uiState;
   useEffect(() => {
     if (
       !Object.values(filterRule).every(
@@ -75,13 +75,20 @@ export default function Home() {
     }
   }, [filterRule, initialProposal, setProposalList, stringArrayFilterRule]);
 
+  function onLeftPanelBackClicked() {
+    setUIState({
+      ...uiState,
+      leftPanelUIAppear: false,
+    });
+  }
+
   function onFilterUIAppearClicked() {
     setUIState((uiState) => {
       return {
         ...uiState,
         filterUIAppear: !uiState.filterUIAppear,
-        decisionOrderUIAppear: false
-      }
+        decisionOrderUIAppear: false,
+      };
     });
   }
 
@@ -90,9 +97,18 @@ export default function Home() {
       return {
         ...uiState,
         decisionOrderUIAppear: !uiState.decisionOrderUIAppear,
-        filterUIAppear: false
-      }
+        filterUIAppear: false,
+      };
     });
+  }
+
+  function onProposalListSideTagClicked() {
+    setUIState((uiState) => {
+      return {
+        ...uiState,
+        leftPanelUIAppear: true
+      }
+    })
   }
 
   function onDetailTagClicked() {
@@ -125,7 +141,11 @@ export default function Home() {
 
   return (
     <div className={`${styles["main"]}`}>
-      <div className={`${styles["proposal-list"]}`}>
+      <div
+        className={`${styles["proposal-list"]} ${
+          leftPanelUIAppear ? styles["proposal-list-appear"] : ""
+        }`}
+      >
         <div className={`${styles["proposal-list-header-container"]}`}>
           <div className={`${styles["proposal-header-left"]}`}>
             <Image
@@ -137,7 +157,7 @@ export default function Home() {
             <span>各局處提案</span>
           </div>
           <div className={`${styles["proposal-header-right"]}`}>
-          <Image
+            <Image
               className={`${styles["filter-image"]}`}
               onClick={onDecisionOrderUIClicked}
               src="/images/network_node.png"
@@ -152,6 +172,14 @@ export default function Home() {
               width={30}
               height={30}
               alt="filter"
+            />
+            <Image
+              className={`${styles["filter-image"]}`}
+              onClick={onLeftPanelBackClicked}
+              src="/images/arrow_back.png"
+              width={30}
+              height={30}
+              alt="back"
             />
           </div>
         </div>
@@ -174,21 +202,30 @@ export default function Home() {
           )}
         </div>
       </div>
+      <div></div>
+      {!leftPanelUIAppear && (
+        <div
+          className={`${styles["left-side-tag"]} ${styles["proposal-list-tag"]}`}
+          onClick={onProposalListSideTagClicked}
+        >
+          <span>提案清單</span>
+        </div>
+      )}
       <div
-        className={`${styles["side-tag"]} ${styles["detail-tag"]}`}
+        className={`${styles["right-side-tag"]} ${styles["detail-tag"]}`}
         onClick={onDetailTagClicked}
       >
         <span>提案資訊</span>
       </div>
       <div
-        className={`${styles["side-tag"]} ${styles["decision-tree-tag"]}`}
+        className={`${styles["right-side-tag"]} ${styles["decision-tree-tag"]}`}
         onClick={onDecisionTreeTagClicked}
       >
         <span>提案決策樹</span>
         {/* <Image src='/images/arrow_back.png' alt="backward arrow" width={24} height={24} /> */}
       </div>
       <div
-        className={`${styles["side-tag"]} ${styles["update-proposal-tag"]}`}
+        className={`${styles["right-side-tag"]} ${styles["update-proposal-tag"]}`}
         onClick={onUpdateProposalTagClicked}
       >
         <span>更新提案</span>
@@ -207,7 +244,7 @@ export default function Home() {
           currentDisplaySection === "decision-tree"
             ? styles["decision-tree-container-enabled"]
             : ""
-        }`}
+        }  ${ !leftPanelUIAppear && currentDisplaySection === "decision-tree" ? styles['full-width'] : ""}`}
       >
         {initialProposal && <DecisionTree />}
       </div>

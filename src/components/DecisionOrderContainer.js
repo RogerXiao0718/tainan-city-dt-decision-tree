@@ -10,17 +10,26 @@ export default function DecisionOrderContainer() {
     const onOrderSelectChangeGenerator = (optionDecision) => {
         return (event) => {
             const value = parseInt(event.target.value)
-            const newDecisionList = currentDecisionList.filter(decision => {
-                return decision.ch !== optionDecision.ch
-            })
-            console.log(newDecisionList)
-            const frontSlice = newDecisionList.slice(0, value)
-            const backSlice = newDecisionList.slice(value)
-            setCurrentDecisionList([
-                ...frontSlice,
-                optionDecision,
-                ...backSlice
-            ])
+            if (value === -1) {
+                if (currentDecisionList.length > 2) {
+                    const newDecisionList = currentDecisionList.filter(decision => {
+                        return decision.en !== optionDecision.en
+                    }) 
+                    setCurrentDecisionList(newDecisionList)
+                }
+            } else {
+                const newDecisionList = currentDecisionList.filter(decision => {
+                    return decision.ch !== optionDecision.ch
+                })
+                console.log(newDecisionList)
+                const frontSlice = newDecisionList.slice(0, value)
+                const backSlice = newDecisionList.slice(value)
+                setCurrentDecisionList([
+                    ...frontSlice,
+                    optionDecision,
+                    ...backSlice
+                ])
+            }
         }
     }
 
@@ -54,6 +63,7 @@ export default function DecisionOrderContainer() {
                                     {decision.ch}
                                 </span>
                                 <select className={`${styles['order-select']}`} onChange={onOrderSelectChangeGenerator(decision)} value={index}>
+                                    <option value={-1}>{0}</option>
                                     {
                                         currentDecisionList.map((_, index) => {
                                             return (
