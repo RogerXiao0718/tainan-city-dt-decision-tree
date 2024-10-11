@@ -607,5 +607,42 @@
             "value": true,
             "note": ""
         }
+    },
+    {
+        "name": "數位雙生應用於資訊安全韌性防護",
+        "departments": [
+            "智發中心"
+        ],
+        "domain": [
+            "公共服務"
+        ],
+        "doable": {
+            "value": true,
+            "note": ""
+        },
+        "profitable": {
+            "value": false,
+            "note": ""
+        },
+        "publicService": {
+            "value": true,
+            "note": ""
+        },
+        "sustainable": {
+            "value": true,
+            "note": ""
+        },
+        "deptCollab": {
+            "value": false,
+            "note": ""
+        },
+        "crossCityCollab": {
+            "value": false,
+            "note": ""
+        },
+        "internationalPromote": {
+            "value": true,
+            "note": ""
+        }
     }
 ]
