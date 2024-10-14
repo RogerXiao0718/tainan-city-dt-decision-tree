@@ -9,7 +9,7 @@ import { UIStateContext } from "@/context/UIStateProvider"
 export default function ProposalItem(props) {
     const {proposal, setCurrentProposal} = props;
     const {name, departments} = proposal
-    const { currentProposal } = useContext(ProposalListContext)
+    const { currentProposal, initialProposal, setInitialProposal } = useContext(ProposalListContext)
     const { uiState, setUIState } = useContext(UIStateContext)
     
 
@@ -21,6 +21,18 @@ export default function ProposalItem(props) {
                 currentDisplaySection: 'detail'
             })
         }
+    }
+
+    function onDeleteButtonClicked() {
+        const newInitialProposal = initialProposal.filter( oldProposal => {
+            return oldProposal.name !== name
+        })
+        
+        setInitialProposal(() => {
+            return [
+                ...newInitialProposal
+            ]
+        })
     }
 
     return (
@@ -38,6 +50,7 @@ export default function ProposalItem(props) {
                 <span>{name}</span>
             </div>
             <div className={`${styles['right-container']}`}>
+                <Image className={`${styles['delete-proposal-icon']}`} src="/images/delete-icon.png"  alt="delete-proposal" width={28} height={28} onClick={onDeleteButtonClicked} />
                 <Image src="/images/Chevron Right.png" alt="more-info" width={36} height={36} />
             </div>
         </div>

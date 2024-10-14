@@ -45,7 +45,7 @@
 
 .right-container {
     right: 60px;
-    width: 10%;
+    width: 20%;
     height: 100%;
     /* border: 1px solid black;
     border-radius: 6px; */
@@ -53,4 +53,15 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.delete-proposal-icon {
+    padding: 4px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.delete-proposal-icon:hover {
+    border: 2px solid #c0392b;
 }
