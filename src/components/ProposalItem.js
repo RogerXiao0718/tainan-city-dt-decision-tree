@@ -2,16 +2,25 @@ import styles from './ProposalItem.module.css'
 import Image from 'next/image'
 import { useContext } from 'react';
 import {ProposalListContext} from '@/context/ProposalListProvider'
+import { UIStateContext } from "@/context/UIStateProvider"
+
 
 
 export default function ProposalItem(props) {
     const {proposal, setCurrentProposal} = props;
     const {name, departments} = proposal
     const { currentProposal } = useContext(ProposalListContext)
+    const { uiState, setUIState } = useContext(UIStateContext)
+    
 
     function onProposalItemClicked() {
         setCurrentProposal(proposal)
-
+        if ( uiState.currentDisplaySection !== 'decision-tree' && uiState.currentDisplaySection !== 'update') {
+            setUIState({
+                ...uiState,
+                currentDisplaySection: 'detail'
+            })
+        }
     }
 
     return (
