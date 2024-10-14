@@ -1,5 +1,6 @@
 'use client'
-import {createContext, useEffect, useState} from 'react'
+import { createContext, useEffect, useState } from 'react'
+import cloneDeep from '@/utils/cloneDeep'
 
 export const ProposalListContext = createContext(null)
 export const initialDecisionOrder = [
@@ -33,24 +34,25 @@ export const initialDecisionOrder = [
     }
 ]
 
-export default function ProposalListProvider({children}) {
+export default function ProposalListProvider({ children }) {
     const [initialProposal, setInitialProposal] = useState(null)
     const [proposalList, setProposalList] = useState(null)
     const [currentProposal, setCurrentProposal] = useState(null)
-    const [currentDecisionList, setCurrentDecisionList] = useState(initialDecisionOrder)
+    const [currentDecisionList, setCurrentDecisionList] = useState(cloneDeep(initialDecisionOrder))
     
+
     const proposalURL = '/data/proposalList.json'
     useEffect(() => {
         fetch(proposalURL)
-        .then( response => response.json())
-        .then(data => {
-            setInitialProposal(data)
-            setProposalList(data)
-        })
+            .then(response => response.json())
+            .then(data => {
+                setInitialProposal(data)
+                setProposalList(data)
+            })
     }, [])
 
     return (
-        <ProposalListContext.Provider value={{initialProposal, setInitialProposal, proposalList, setProposalList, currentProposal, setCurrentProposal, currentDecisionList, setCurrentDecisionList}}>
+        <ProposalListContext.Provider value={{ initialProposal, setInitialProposal, proposalList, setProposalList, currentProposal, setCurrentProposal, currentDecisionList, setCurrentDecisionList }}>
             {children}
         </ProposalListContext.Provider>
     )

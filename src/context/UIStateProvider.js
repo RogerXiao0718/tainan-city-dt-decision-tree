@@ -4,7 +4,7 @@ import {createContext, useState} from 'react'
 export const UIStateContext = createContext()
 
 const initialUIState = {
-    currentDisplaySection: 'detail',  // 'detail' | 'decision-tree' | 'update'
+    currentDisplaySection: 'detail',  // 'detail' | 'decision-tree' | 'create' | 'update'
     filterUIAppear: false,
     decisionOrderUIAppear: false,
     leftPanelUIAppear: true

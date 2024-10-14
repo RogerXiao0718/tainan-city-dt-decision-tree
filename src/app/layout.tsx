@@ -4,6 +4,7 @@ import AppHeader from "@/components/AppHeader";
 import FilterRuleProvider from "@/context/FilterRuleProvider";
 import ProposalListProvider from "@/context/ProposalListProvider";
 import UIStateProvider from "@/context/UIStateProvider";
+import CreateProposalProvider from "@/context/CreateProposalProvider"
 import "./globals.css";
 
 const geistSans = localFont({
@@ -35,8 +36,10 @@ export default function RootLayout({
         <UIStateProvider>
           <ProposalListProvider>
             <FilterRuleProvider>
-              <AppHeader />
-              {children}
+              <CreateProposalProvider>
+                <AppHeader />
+                {children}
+              </CreateProposalProvider>
             </FilterRuleProvider>
           </ProposalListProvider>
         </UIStateProvider>

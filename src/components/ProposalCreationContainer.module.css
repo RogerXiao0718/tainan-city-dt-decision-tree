@@ -1,0 +1,172 @@
+.proposal-creation-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.proposal-creation-form {
+    width: 60%;
+    height: 540px;
+    border-radius: 5%;
+    border: 2px solid #2c3e50;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.creation-form-header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.creation-form-header-container span {
+    font-size: 20px;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.proposal-name-container {
+    width: 100%;
+    margin-top: 20px;
+
+}
+
+.proposal-name-label {
+    display: inline-block;
+    font-size: 16px;
+    color: #2c3e50;
+    font-weight: bold;
+    margin-right: 10px;
+    width: 30%;
+    text-align: right;
+}
+
+.proposal-name-input {
+    width: 200px;
+    height: 28px;
+    padding: 4px 8px;
+    border: 1px solid #2c3e50;
+    border-radius: 14px;
+    box-shadow: 0px 0px 2px 0px #2d3436;
+}
+
+.selector-container {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+}
+
+.selector-label {
+    font-size: 16px;
+    color: #2c3e50;
+    font-weight: bold;
+    margin-right: 10px;
+    width: 30%;
+    text-align: right;
+}
+
+.selector {
+    width: 120px;
+    height: 28px;
+    text-align: center;
+    border-radius: 14px;
+    border: 1px solid #2c3e50;
+    box-shadow: 0px 0px 2px 0px #2d3436;
+    margin-right: 10px;
+    
+}
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-left: 30%;
+    margin-top: 10px;
+}
+
+.card {
+    padding: 6px;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #2d3436;
+    color: white;
+    margin-right: 10px;
+    transition: all .2s;
+    margin-bottom: 2px;
+}
+
+.card:hover {
+    background-color: #c0392b;
+}
+
+.toggle-button-form-container {
+    margin-top: 1px;
+    width: 100%;
+}
+
+.toggle-button-row-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.toggle-button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50%;
+    padding-right: 20%;
+}
+
+.toggle-button-container span {
+    font-weight: bold;
+    margin-right: 16px;
+    color: #2c3e50;
+}
+
+.alert-message-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 18px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #c0392b;
+    text-align: center;
+}
+
+.submit-button-container {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit-button {
+    background-color: #3498db;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: none;
+    transition: all .2s;
+    margin-bottom: 10px;
+}
+
+.submit-button:hover {
+    background-color: #2980b9;
+}

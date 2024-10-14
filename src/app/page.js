@@ -12,6 +12,7 @@ import { FilterRuleContext } from "@/context/FilterRuleProvider";
 import { ProposalListContext } from "@/context/ProposalListProvider";
 import { UIStateContext } from "@/context/UIStateProvider";
 import DecisionTree from "@/components/DecisionTree";
+import ProposalCreationContainer from "@/components/ProposalCreationContainer"
 import UpdateProposalContainer from "@/components/UpdateProposalContainer";
 import UpdateFieldProvider from "@/context/UpdateFieldProvider";
 
@@ -130,6 +131,15 @@ export default function Home() {
     });
   }
 
+  function onCreationTagClicked() {
+    setUIState((uiState) => {
+      return {
+        ...uiState,
+        currentDisplaySection: 'create'
+      }
+    })
+  }
+
   function onUpdateProposalTagClicked() {
     setUIState((uiState) => {
       return {
@@ -222,7 +232,12 @@ export default function Home() {
         onClick={onDecisionTreeTagClicked}
       >
         <span>提案決策樹</span>
-        {/* <Image src='/images/arrow_back.png' alt="backward arrow" width={24} height={24} /> */}
+      </div>
+      <div
+        className={`${styles["right-side-tag"]} ${styles["create-proposal-tag"]}`}
+        onClick={onCreationTagClicked}
+      >
+        <span>新增提案</span>
       </div>
       <div
         className={`${styles["right-side-tag"]} ${styles["update-proposal-tag"]}`}
@@ -247,6 +262,9 @@ export default function Home() {
         }  ${ !leftPanelUIAppear && currentDisplaySection === "decision-tree" ? styles['full-width'] : ""}`}
       >
         {initialProposal && <DecisionTree />}
+      </div>
+      <div className={`${styles['proposal-creation-container']} ${currentDisplaySection === 'create' ? styles['proposal-creation-container-enabled'] : ""}`}>
+        <ProposalCreationContainer />
       </div>
       <div
         className={`${styles["update-section-container"]} ${
