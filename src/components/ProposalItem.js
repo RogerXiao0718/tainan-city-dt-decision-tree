@@ -9,7 +9,7 @@ import { UIStateContext } from "@/context/UIStateProvider"
 export default function ProposalItem(props) {
     const {proposal, setCurrentProposal} = props;
     const {name, departments} = proposal
-    const { currentProposal, initialProposal, setInitialProposal } = useContext(ProposalListContext)
+    const { currentProposal,  initialProposal, setInitialProposal } = useContext(ProposalListContext)
     const { uiState, setUIState } = useContext(UIStateContext)
     
 
@@ -23,7 +23,9 @@ export default function ProposalItem(props) {
         }
     }
 
-    function onDeleteButtonClicked() {
+    function onDeleteButtonClicked(event) {
+        event.stopPropagation()
+        setCurrentProposal(null)
         const newInitialProposal = initialProposal.filter( oldProposal => {
             return oldProposal.name !== name
         })
