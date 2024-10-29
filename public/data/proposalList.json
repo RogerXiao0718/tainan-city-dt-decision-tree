@@ -197,43 +197,6 @@
         }
     },
     {
-        "name": "數位雙生輔助太陽能智慧化管理",
-        "departments": [
-            "經濟發展局"
-        ],
-        "domain": [
-            "公共服務"
-        ],
-        "doable": {
-            "value": false,
-            "note": ""
-        },
-        "profitable": {
-            "value": true,
-            "note": ""
-        },
-        "publicService": {
-            "value": true,
-            "note": ""
-        },
-        "sustainable": {
-            "value": true,
-            "note": ""
-        },
-        "deptCollab": {
-            "value": true,
-            "note": ""
-        },
-        "crossCityCollab": {
-            "value": true,
-            "note": ""
-        },
-        "internationalPromote": {
-            "value": true,
-            "note": ""
-        }
-    },
-    {
         "name": "數位雙生輔助沙崙科學城園區管理",
         "departments": [
             "經濟發展局"
@@ -609,7 +572,7 @@
         }
     },
     {
-        "name": "數位雙生應用於資訊安全韌性防護",
+        "name": "應用數位雙生管理電腦資訊機房",
         "departments": [
             "智發中心"
         ],
@@ -633,7 +596,7 @@
             "note": ""
         },
         "deptCollab": {
-            "value": false,
+            "value": true,
             "note": ""
         },
         "crossCityCollab": {
@@ -641,7 +604,7 @@
             "note": ""
         },
         "internationalPromote": {
-            "value": true,
+            "value": false,
             "note": ""
         }
     }
