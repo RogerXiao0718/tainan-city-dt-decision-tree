@@ -73,7 +73,7 @@
             "note": ""
         },
         "internationalPromote": {
-            "value": false,
+            "value": true,
             "note": ""
         }
     },
@@ -113,7 +113,7 @@
             "note": ""
         },
         "internationalPromote": {
-            "value": false,
+            "value": true,
             "note": ""
         }
     },
@@ -188,7 +188,7 @@
             "note": ""
         },
         "crossCityCollab": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "internationalPromote": {
@@ -608,4 +608,4 @@
             "note": ""
         }
     }
-]
+] 
