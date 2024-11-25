@@ -2,7 +2,8 @@
     {
         "name": "博物展館三維建模結合室內展覽VR體驗",
         "departments": [
-            "文化局"
+            "文化局",
+            "觀光旅遊局"
         ],
         "domain": [
             "文化",
@@ -41,7 +42,8 @@
     {
         "name": "數位雙生輔助線上觀光並輔助古蹟修繕",
         "departments": [
-            "文化局"
+            "文化局",
+            "觀光旅遊局"
         ],
         "domain": [
             "文化",
@@ -80,7 +82,8 @@
     {
         "name": "商圈及老街建模結合VR環遊服務",
         "departments": [
-            "觀光旅遊局"
+            "觀光旅遊局",
+            "文化局"
         ],
         "domain": [
             "文化",
@@ -435,7 +438,7 @@
             "note": ""
         },
         "profitable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "publicService": {
