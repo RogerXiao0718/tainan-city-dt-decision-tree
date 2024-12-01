@@ -15,7 +15,7 @@
             "note": ""
         },
         "profitable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "publicService": {
@@ -23,7 +23,7 @@
             "note": ""
         },
         "sustainable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "deptCollab": {
@@ -63,7 +63,7 @@
             "note": ""
         },
         "sustainable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "deptCollab": {
@@ -96,7 +96,7 @@
             "note": ""
         },
         "profitable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "publicService": {
@@ -104,7 +104,7 @@
             "note": ""
         },
         "sustainable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "deptCollab": {
@@ -136,7 +136,7 @@
             "note": ""
         },
         "profitable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "publicService": {
@@ -144,7 +144,7 @@
             "note": ""
         },
         "sustainable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "deptCollab": {
@@ -220,7 +220,7 @@
             "note": ""
         },
         "sustainable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "deptCollab": {
@@ -257,7 +257,7 @@
             "note": ""
         },
         "sustainable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "deptCollab": {
@@ -286,7 +286,7 @@
             "note": ""
         },
         "profitable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "publicService": {
@@ -294,7 +294,7 @@
             "note": ""
         },
         "sustainable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "deptCollab": {
@@ -335,7 +335,7 @@
             "note": ""
         },
         "sustainable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "deptCollab": {
@@ -372,7 +372,7 @@
             "note": ""
         },
         "sustainable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "deptCollab": {
@@ -409,7 +409,7 @@
             "note": ""
         },
         "sustainable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "deptCollab": {
@@ -446,7 +446,7 @@
             "note": ""
         },
         "sustainable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "deptCollab": {
@@ -484,7 +484,7 @@
             "note": ""
         },
         "sustainable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "deptCollab": {
@@ -513,7 +513,7 @@
             "note": ""
         },
         "profitable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "publicService": {
@@ -521,7 +521,7 @@
             "note": ""
         },
         "sustainable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "deptCollab": {
@@ -558,7 +558,7 @@
             "note": ""
         },
         "sustainable": {
-            "value": true,
+            "value": false,
             "note": ""
         },
         "deptCollab": {
