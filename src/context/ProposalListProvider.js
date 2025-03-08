@@ -1,8 +1,8 @@
-'use client'
-import { createContext, useEffect, useState } from 'react'
+"use client";
+import { createContext, useEffect, useState } from "react";
 // import cloneDeep from '@/utils/cloneDeep'
 
-export const ProposalListContext = createContext(null)
+export const ProposalListContext = createContext(null);
 // export const initialDecisionOrder = [
 //     {
 //         en: 'doable',
@@ -35,37 +35,59 @@ export const ProposalListContext = createContext(null)
 // ]
 
 export default function ProposalListProvider({ children }) {
-    const [initialProposal, setInitialProposal] = useState(null)
-    const [proposalList, setProposalList] = useState(null)
-    const [currentProposal, setCurrentProposal] = useState(null)
-    const [currentDecisionList, setCurrentDecisionList] = useState(null)
-    const [initialDecisionOrder, setInitialDecisionOrder] = useState(null)
-    
+  const [initialProposal, setInitialProposal] = useState(null);
+  const [proposalList, setProposalList] = useState(null);
+  const [currentProposal, setCurrentProposal] = useState(null);
+  const [currentDecisionList, setCurrentDecisionList] = useState(null);
+  const [initialDecisionOrder, setInitialDecisionOrder] = useState(null);
+  const [filterRule, setFilterRule] = useState(null);
 
-    const proposalURL = '/data/proposalList.json'
-    useEffect(() => {
-        fetch(proposalURL)
-            .then(response => response.json())
-            .then(data => {
-                setInitialProposal(data)
-                setProposalList(data)
-                let decisionList = Object.keys(data[0]).filter(
-                    dataKey => {
-                        if (dataKey !== "name" && dataKey !== "departments" && dataKey !== "domain") {
-                            return true
-                        } else {
-                            return false;
-                        }
-                    }
-                )
-                setCurrentDecisionList(decisionList)
-                setInitialDecisionOrder(decisionList)
-            })
-    }, [])
+  const proposalURL = "/data/proposalList.json";
+  useEffect(() => {
+    fetch(proposalURL)
+      .then((response) => response.json())
+      .then((data) => {
+        setInitialProposal(data);
+        setProposalList(data);
+        let decisionList = Object.keys(data[0]).filter((dataKey) => {
+          if (
+            dataKey !== "name" &&
+            dataKey !== "departments" &&
+            dataKey !== "domain"
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        let initialFilterRule = {};
+        decisionList.forEach((decision) => {
+          initialFilterRule[decision] = false;
+        });
+        setCurrentDecisionList(decisionList);
+        setInitialDecisionOrder(decisionList);
+        setFilterRule(initialFilterRule);
+      });
+  }, []);
 
-    return (
-        <ProposalListContext.Provider value={{ initialProposal, setInitialProposal, proposalList, setProposalList, currentProposal, setCurrentProposal, currentDecisionList, setCurrentDecisionList, initialDecisionOrder, setInitialDecisionOrder }}>
-            {children}
-        </ProposalListContext.Provider>
-    )
+  return (
+    <ProposalListContext.Provider
+      value={{
+        initialProposal,
+        setInitialProposal,
+        proposalList,
+        setProposalList,
+        currentProposal,
+        setCurrentProposal,
+        currentDecisionList,
+        setCurrentDecisionList,
+        initialDecisionOrder,
+        setInitialDecisionOrder,
+        filterRule,
+        setFilterRule,
+      }}
+    >
+      {children}
+    </ProposalListContext.Provider>
+  );
 }

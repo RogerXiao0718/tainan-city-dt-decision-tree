@@ -12,66 +12,69 @@ import { FilterRuleContext } from "@/context/FilterRuleProvider";
 import { ProposalListContext } from "@/context/ProposalListProvider";
 import { UIStateContext } from "@/context/UIStateProvider";
 import DecisionTree from "@/components/DecisionTree";
-import ProposalCreationContainer from "@/components/ProposalCreationContainer"
+import ProposalCreationContainer from "@/components/ProposalCreationContainer";
 import UpdateProposalContainer from "@/components/UpdateProposalContainer";
 import UpdateFieldProvider from "@/context/UpdateFieldProvider";
 
 export default function Home() {
   // const [currentProposal, setCurrentProposal] = useState(null)
 
-  const { filterRule, setFilterRule, stringArrayFilterRule } =
-    useContext(FilterRuleContext);
+  const { stringArrayFilterRule } = useContext(FilterRuleContext);
   const {
     proposalList,
     setProposalList,
     currentProposal,
     setCurrentProposal,
     initialProposal,
+    filterRule,
+    setFilterRule,
   } = useContext(ProposalListContext);
   const { uiState, setUIState } = useContext(UIStateContext);
   const { currentDisplaySection, leftPanelUIAppear } = uiState;
   useEffect(() => {
-    if (
-      !Object.values(filterRule).every(
-        (filterValue) => filterValue === false
-      ) ||
-      !Object.values(stringArrayFilterRule).every(
-        (filterValue) => filterValue === ""
-      )
-    ) {
-      const filterRuleKeys = Object.keys(filterRule);
-      const DropDownFilterRuleKeys = Object.keys(stringArrayFilterRule);
-      // apply filter rule to proposal list
-      const filtered_proposal = initialProposal.filter((proposal) => {
-        let filterResult = true;
-        for (const filterKey of filterRuleKeys) {
-          if (filterRule[filterKey] === true) {
-            if (proposal[filterKey].value === false) {
-              filterResult = false;
+    if (filterRule) {
+      if (
+        !Object.values(filterRule).every(
+          (filterValue) => filterValue === false
+        ) ||
+        !Object.values(stringArrayFilterRule).every(
+          (filterValue) => filterValue === ""
+        )
+      ) {
+        const filterRuleKeys = Object.keys(filterRule);
+        const DropDownFilterRuleKeys = Object.keys(stringArrayFilterRule);
+        // apply filter rule to proposal list
+        const filtered_proposal = initialProposal.filter((proposal) => {
+          let filterResult = true;
+          for (const filterKey of filterRuleKeys) {
+            if (filterRule[filterKey] === true) {
+              if (proposal[filterKey].value === false) {
+                filterResult = false;
+              }
             }
           }
-        }
 
-        // drop down list filter rule
-        let dropDownFilterResult = true;
-        for (const DropDownFilterRuleKey of DropDownFilterRuleKeys) {
-          if (stringArrayFilterRule[DropDownFilterRuleKey] !== "") {
-            if (
-              !proposal[DropDownFilterRuleKey].includes(
-                stringArrayFilterRule[DropDownFilterRuleKey]
-              )
-            ) {
-              dropDownFilterResult = false;
+          // drop down list filter rule
+          let dropDownFilterResult = true;
+          for (const DropDownFilterRuleKey of DropDownFilterRuleKeys) {
+            if (stringArrayFilterRule[DropDownFilterRuleKey] !== "") {
+              if (
+                !proposal[DropDownFilterRuleKey].includes(
+                  stringArrayFilterRule[DropDownFilterRuleKey]
+                )
+              ) {
+                dropDownFilterResult = false;
+              }
             }
           }
+          return filterResult && dropDownFilterResult;
+        });
+        setProposalList([...filtered_proposal]);
+      } else {
+        // reset proposals
+        if (initialProposal) {
+          setProposalList([...initialProposal]);
         }
-        return filterResult && dropDownFilterResult;
-      });
-      setProposalList([...filtered_proposal]);
-    } else {
-      // reset proposals
-      if (initialProposal) {
-        setProposalList([...initialProposal]);
       }
     }
   }, [filterRule, initialProposal, setProposalList, stringArrayFilterRule]);
@@ -107,9 +110,9 @@ export default function Home() {
     setUIState((uiState) => {
       return {
         ...uiState,
-        leftPanelUIAppear: true
-      }
-    })
+        leftPanelUIAppear: true,
+      };
+    });
   }
 
   function onDetailTagClicked() {
@@ -135,9 +138,9 @@ export default function Home() {
     setUIState((uiState) => {
       return {
         ...uiState,
-        currentDisplaySection: 'create'
-      }
-    })
+        currentDisplaySection: "create",
+      };
+    });
   }
 
   function onUpdateProposalTagClicked() {
@@ -259,11 +262,21 @@ export default function Home() {
           currentDisplaySection === "decision-tree"
             ? styles["decision-tree-container-enabled"]
             : ""
-        }  ${ !leftPanelUIAppear && currentDisplaySection === "decision-tree" ? styles['full-width'] : ""}`}
+        }  ${
+          !leftPanelUIAppear && currentDisplaySection === "decision-tree"
+            ? styles["full-width"]
+            : ""
+        }`}
       >
         {initialProposal && <DecisionTree />}
       </div>
-      <div className={`${styles['proposal-creation-container']} ${currentDisplaySection === 'create' ? styles['proposal-creation-container-enabled'] : ""}`}>
+      <div
+        className={`${styles["proposal-creation-container"]} ${
+          currentDisplaySection === "create"
+            ? styles["proposal-creation-container-enabled"]
+            : ""
+        }`}
+      >
         <ProposalCreationContainer />
       </div>
       <div
