@@ -173,10 +173,10 @@
     top: var(--create-proposal-tag);
 }
 
-.update-proposal-tag {
+/* .update-proposal-tag {
     --update-proposal-tag-top: calc(var(--header-height) + 360px);
     top: var(--update-proposal-tag-top)
-}
+} */
 
 .decision-tree-container {
     --decision-tree-container-height: calc(100% - var(--header-height));

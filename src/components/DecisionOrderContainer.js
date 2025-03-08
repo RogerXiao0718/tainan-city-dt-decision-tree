@@ -1,10 +1,10 @@
 import styles from "./DecisionOrderContainer.module.css"
 import { useContext } from "react"
-import { ProposalListContext, initialDecisionOrder } from '@/context/ProposalListProvider'
+import { ProposalListContext } from '@/context/ProposalListProvider'
 import { UIStateContext } from '@/context/UIStateProvider'
 
 export default function DecisionOrderContainer() {
-    const { currentDecisionList, setCurrentDecisionList } = useContext(ProposalListContext)
+    const { currentDecisionList, setCurrentDecisionList, initialDecisionOrder } = useContext(ProposalListContext)
     const {uiState, setUIState} = useContext(UIStateContext)
     const {decisionOrderUIAppear} = uiState
     const onOrderSelectChangeGenerator = (optionDecision) => {
@@ -13,13 +13,13 @@ export default function DecisionOrderContainer() {
             if (value === -1) {
                 if (currentDecisionList.length > 2) {
                     const newDecisionList = currentDecisionList.filter(decision => {
-                        return decision.en !== optionDecision.en
+                        return decision !== optionDecision
                     }) 
                     setCurrentDecisionList(newDecisionList)
                 }
             } else {
                 const newDecisionList = currentDecisionList.filter(decision => {
-                    return decision.ch !== optionDecision.ch
+                    return decision !== optionDecision
                 })
                 console.log(newDecisionList)
                 const frontSlice = newDecisionList.slice(0, value)
@@ -60,7 +60,7 @@ export default function DecisionOrderContainer() {
                                     {index + 1}
                                 </span>
                                 <span className={`${styles['decision-ch-title']}`}>
-                                    {decision.ch}
+                                    {decision}
                                 </span>
                                 <select className={`${styles['order-select']}`} onChange={onOrderSelectChangeGenerator(decision)} value={index}>
                                     <option value={-1}>{0}</option>

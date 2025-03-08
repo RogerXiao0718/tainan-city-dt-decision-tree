@@ -239,12 +239,12 @@ export default function Home() {
       >
         <span>新增提案</span>
       </div>
-      <div
+      {/* <div
         className={`${styles["right-side-tag"]} ${styles["update-proposal-tag"]}`}
         onClick={onUpdateProposalTagClicked}
       >
         <span>更新提案</span>
-      </div>
+      </div> */}
       <div
         className={`${styles["detail-info-section"]} ${
           currentDisplaySection === "detail"
@@ -273,9 +273,9 @@ export default function Home() {
             : ""
         }`}
       >
-        <UpdateFieldProvider>
+        {/* <UpdateFieldProvider>
           <UpdateProposalContainer currentProposal={currentProposal} />
-        </UpdateFieldProvider>
+        </UpdateFieldProvider> */}
       </div>
     </div>
   );
