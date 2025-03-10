@@ -1,194 +1,278 @@
 [
-    {
-      "name": "博物展館三維建模結合室內展覽VR體驗",
-      "departments": "文化局,觀光旅遊局",
-      "domain": "文化,觀光,旅遊",
-      "可行性": true,
-      "商轉價值": false,
-      "公共服務": false,
-      "永續經營": false,
-      "跨機關合作": true,
-      "跨縣市合作": false,
-      "國際推廣": true
-    },
-    {
-      "name": "數位雙生輔助線上觀光並輔助古蹟修繕",
-      "departments": "文化局,觀光旅遊局",
-      "domain": "文化,觀光,旅遊",
-      "可行性": true,
-      "商轉價值": false,
-      "公共服務": false,
-      "永續經營": false,
-      "跨機關合作": true,
-      "跨縣市合作": false,
-      "國際推廣": true
-    },
-    {
-      "name": "商圈及老街建模結合VR環遊服務",
-      "departments": "觀光旅遊局,文化局",
-      "domain": "文化,觀光,旅遊,電商",
-      "可行性": true,
-      "商轉價值": false,
-      "公共服務": false,
-      "永續經營": false,
-      "跨機關合作": true,
-      "跨縣市合作": false,
-      "國際推廣": true
-    },
-    {
-      "name": "動物園建模結合沉浸式VR互動體驗",
-      "departments": "觀光旅遊局",
-      "domain": "觀光,旅遊,娛樂,學習",
-      "可行性": true,
-      "商轉價值": false,
-      "公共服務": false,
-      "永續經營": false,
-      "跨機關合作": false,
-      "跨縣市合作": false,
-      "國際推廣": true
-    },
-    {
-      "name": "數位雙生輔助購物中心運營",
-      "departments": "經濟發展局",
-      "domain": "娛樂,電商,觀光",
-      "可行性": true,
-      "商轉價值": true,
-      "公共服務": false,
-      "永續經營": true,
-      "跨機關合作": false,
-      "跨縣市合作": false,
-      "國際推廣": true
-    },
-    {
-      "name": "數位雙生輔助沙崙科學城園區管理",
-      "departments": "經濟發展局",
-      "domain": "公共服務",
-      "可行性": true,
-      "商轉價值": false,
-      "公共服務": true,
-      "永續經營": false,
-      "跨機關合作": true,
-      "跨縣市合作": false,
-      "國際推廣": true
-    },
-    {
-      "name": "數位雙生輔助公有零售市場管理",
-      "departments": "經濟發展局",
-      "domain": "公共服務",
-      "可行性": true,
-      "商轉價值": false,
-      "公共服務": true,
-      "永續經營": false,
-      "跨機關合作": false,
-      "跨縣市合作": false,
-      "國際推廣": true
-    },
-    {
-      "name": "使用VR技術結合運動訓練",
-      "departments": "體育局",
-      "domain": "運動科技",
-      "可行性": true,
-      "商轉價值": false,
-      "公共服務": false,
-      "永續經營": false,
-      "跨機關合作": false,
-      "跨縣市合作": false,
-      "國際推廣": true
-    },
-    {
-      "name": "數位雙生輔助城市治理",
-      "departments": "都市發展局,交通局,民政局,消防局,水利局",
-      "domain": "公共服務",
-      "可行性": false,
-      "商轉價值": false,
-      "公共服務": true,
-      "永續經營": false,
-      "跨機關合作": true,
-      "跨縣市合作": true,
-      "國際推廣": true
-    },
-    {
-      "name": "數位雙生輔助交通治理",
-      "departments": "交通局",
-      "domain": "公共服務",
-      "可行性": true,
-      "商轉價值": false,
-      "公共服務": true,
-      "永續經營": false,
-      "跨機關合作": true,
-      "跨縣市合作": true,
-      "國際推廣": true
-    },
-    {
-      "name": "數位雙生應用於災害應變",
-      "departments": "消防局",
-      "domain": "公共服務",
-      "可行性": true,
-      "商轉價值": false,
-      "公共服務": true,
-      "永續經營": false,
-      "跨機關合作": true,
-      "跨縣市合作": false,
-      "國際推廣": true
-    },
-    {
-      "name": "MR火場導航系統",
-      "departments": "消防局",
-      "domain": "公共服務",
-      "可行性": false,
-      "商轉價值": false,
-      "公共服務": true,
-      "永續經營": false,
-      "跨機關合作": false,
-      "跨縣市合作": true,
-      "國際推廣": true
-    },
-    {
-      "name": "數位雙生輔助水情控管",
-      "departments": "水利局,工務局",
-      "domain": "公共服務",
-      "可行性": true,
-      "商轉價值": false,
-      "公共服務": true,
-      "永續經營": false,
-      "跨機關合作": true,
-      "跨縣市合作": true,
-      "國際推廣": true
-    },
-    {
-      "name": "使用數位雙生技術輔助汙水處理廠管理",
-      "departments": "水利局",
-      "domain": "公共服務",
-      "可行性": true,
-      "商轉價值": false,
-      "公共服務": true,
-      "永續經營": false,
-      "跨機關合作": false,
-      "跨縣市合作": false,
-      "國際推廣": true
-    },
-    {
-      "name": "使用數位雙生技術管理城市地下管路",
-      "departments": "工務局",
-      "domain": "公共服務",
-      "可行性": true,
-      "商轉價值": false,
-      "公共服務": true,
-      "永續經營": false,
-      "跨機關合作": true,
-      "跨縣市合作": false,
-      "國際推廣": true
-    },
-    {
-      "name": "應用數位雙生管理電腦資訊機房",
-      "departments": "智發中心",
-      "domain": "公共服務",
-      "可行性": true,
-      "商轉價值": false,
-      "公共服務": true,
-      "永續經營": true,
-      "跨機關合作": true,
-      "跨縣市合作": false,
-      "國際推廣": false
-    }
-  ]
+  {
+    "name": "博物展館三維建模結合室內展覽VR體驗",
+    "departments": [
+      "文化局",
+      "觀光旅遊局"
+    ],
+    "domain": [
+      "文化",
+      "觀光",
+      "旅遊"
+    ],
+    "可行性": true,
+    "商轉價值": false,
+    "公共服務": false,
+    "永續經營": false,
+    "跨機關合作": true,
+    "跨縣市合作": false,
+    "國際推廣": true
+  },
+  {
+    "name": "數位雙生輔助線上觀光並輔助古蹟修繕",
+    "departments": [
+      "文化局",
+      "觀光旅遊局"
+    ],
+    "domain": [
+      "文化",
+      "觀光",
+      "旅遊"
+    ],
+    "可行性": true,
+    "商轉價值": false,
+    "公共服務": false,
+    "永續經營": false,
+    "跨機關合作": true,
+    "跨縣市合作": false,
+    "國際推廣": true
+  },
+  {
+    "name": "商圈及老街建模結合VR環遊服務",
+    "departments": [
+      "觀光旅遊局",
+      "文化局"
+    ],
+    "domain": [
+      "文化",
+      "觀光",
+      "旅遊",
+      "電商"
+    ],
+    "可行性": true,
+    "商轉價值": false,
+    "公共服務": false,
+    "永續經營": false,
+    "跨機關合作": true,
+    "跨縣市合作": false,
+    "國際推廣": true
+  },
+  {
+    "name": "動物園建模結合沉浸式VR互動體驗",
+    "departments": [
+      "觀光旅遊局"
+    ],
+    "domain": [
+      "觀光",
+      "旅遊",
+      "娛樂",
+      "學習"
+    ],
+    "可行性": true,
+    "商轉價值": false,
+    "公共服務": false,
+    "永續經營": false,
+    "跨機關合作": false,
+    "跨縣市合作": false,
+    "國際推廣": true
+  },
+  {
+    "name": "數位雙生輔助購物中心運營",
+    "departments": [
+      "經濟發展局"
+    ],
+    "domain": [
+      "娛樂",
+      "電商",
+      "觀光"
+    ],
+    "可行性": true,
+    "商轉價值": true,
+    "公共服務": false,
+    "永續經營": true,
+    "跨機關合作": false,
+    "跨縣市合作": false,
+    "國際推廣": true
+  },
+  {
+    "name": "數位雙生輔助沙崙科學城園區管理",
+    "departments": [
+      "經濟發展局"
+    ],
+    "domain": [
+      "公共服務"
+    ],
+    "可行性": true,
+    "商轉價值": false,
+    "公共服務": true,
+    "永續經營": false,
+    "跨機關合作": true,
+    "跨縣市合作": false,
+    "國際推廣": true
+  },
+  {
+    "name": "數位雙生輔助公有零售市場管理",
+    "departments": [
+      "經濟發展局"
+    ],
+    "domain": [
+      "公共服務"
+    ],
+    "可行性": true,
+    "商轉價值": false,
+    "公共服務": true,
+    "永續經營": false,
+    "跨機關合作": false,
+    "跨縣市合作": false,
+    "國際推廣": true
+  },
+  {
+    "name": "使用VR技術結合運動訓練",
+    "departments": [
+      "體育局"
+    ],
+    "domain": [
+      "運動科技"
+    ],
+    "可行性": true,
+    "商轉價值": false,
+    "公共服務": false,
+    "永續經營": false,
+    "跨機關合作": false,
+    "跨縣市合作": false,
+    "國際推廣": true
+  },
+  {
+    "name": "數位雙生輔助城市治理",
+    "departments": [
+      "都市發展局",
+      "交通局",
+      "民政局",
+      "消防局",
+      "水利局"
+    ],
+    "domain": [
+      "公共服務"
+    ],
+    "可行性": false,
+    "商轉價值": false,
+    "公共服務": true,
+    "永續經營": false,
+    "跨機關合作": true,
+    "跨縣市合作": true,
+    "國際推廣": true
+  },
+  {
+    "name": "數位雙生輔助交通治理",
+    "departments": [
+      "交通局"
+    ],
+    "domain": [
+      "公共服務"
+    ],
+    "可行性": true,
+    "商轉價值": false,
+    "公共服務": true,
+    "永續經營": false,
+    "跨機關合作": true,
+    "跨縣市合作": true,
+    "國際推廣": true
+  },
+  {
+    "name": "數位雙生應用於災害應變",
+    "departments": [
+      "消防局"
+    ],
+    "domain": [
+      "公共服務"
+    ],
+    "可行性": true,
+    "商轉價值": false,
+    "公共服務": true,
+    "永續經營": false,
+    "跨機關合作": true,
+    "跨縣市合作": false,
+    "國際推廣": true
+  },
+  {
+    "name": "MR火場導航系統",
+    "departments": [
+      "消防局"
+    ],
+    "domain": [
+      "公共服務"
+    ],
+    "可行性": false,
+    "商轉價值": false,
+    "公共服務": true,
+    "永續經營": false,
+    "跨機關合作": false,
+    "跨縣市合作": true,
+    "國際推廣": true
+  },
+  {
+    "name": "數位雙生輔助水情控管",
+    "departments": [
+      "水利局",
+      "工務局"
+    ],
+    "domain": [
+      "公共服務"
+    ],
+    "可行性": true,
+    "商轉價值": false,
+    "公共服務": true,
+    "永續經營": false,
+    "跨機關合作": true,
+    "跨縣市合作": true,
+    "國際推廣": true
+  },
+  {
+    "name": "使用數位雙生技術輔助汙水處理廠管理",
+    "departments": [
+      "水利局"
+    ],
+    "domain": [
+      "公共服務"
+    ],
+    "可行性": true,
+    "商轉價值": false,
+    "公共服務": true,
+    "永續經營": false,
+    "跨機關合作": false,
+    "跨縣市合作": false,
+    "國際推廣": true
+  },
+  {
+    "name": "使用數位雙生技術管理城市地下管路",
+    "departments": [
+      "工務局"
+    ],
+    "domain": [
+      "公共服務"
+    ],
+    "可行性": true,
+    "商轉價值": false,
+    "公共服務": true,
+    "永續經營": false,
+    "跨機關合作": true,
+    "跨縣市合作": false,
+    "國際推廣": true
+  },
+  {
+    "name": "應用數位雙生管理電腦資訊機房",
+    "departments": [
+      "智發中心"
+    ],
+    "domain": [
+      "公共服務"
+    ],
+    "可行性": true,
+    "商轉價值": false,
+    "公共服務": true,
+    "永續經營": true,
+    "跨機關合作": true,
+    "跨縣市合作": false,
+    "國際推廣": false
+  }
+]

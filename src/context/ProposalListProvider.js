@@ -42,6 +42,7 @@ export default function ProposalListProvider({ children }) {
     const [initialDecisionOrder, setInitialDecisionOrder] = useState(null);
     const [proposalCreation, setProposalCreation] = useState(null)
     const [initialProposalCreation, setInitialProposalCreation] = useState(null)
+    const [updateFields, setUpdateFields] = useState(null)
     const [filterRule, setFilterRule] = useState(null);
 
     const proposalURL = "/data/proposalList_refactoring.json";
@@ -49,15 +50,15 @@ export default function ProposalListProvider({ children }) {
         fetch(proposalURL)
             .then((response) => response.json())
             .then((data) => {
-                let updatedData = data.map(record => {
-                    return {
-                        ...record,
-                        departments: record['departments'].trim().split(','),
-                        domain: record['domain'].trim().split(',')
-                    }
-                })
-                setInitialProposal(updatedData);
-                setProposalList(updatedData);
+                // let updatedData = data.map(record => {
+                //     return {
+                //         ...record,
+                //         departments: record['departments'].trim().split(','),
+                //         domain: record['domain'].trim().split(',')
+                //     }
+                // })
+                setInitialProposal(data);
+                setProposalList(data);
                 let decisionList = Object.keys(data[0]).filter((dataKey) => {
                     if (
                         dataKey !== "name" &&
@@ -75,15 +76,18 @@ export default function ProposalListProvider({ children }) {
                     domain: []
                 }
                 let initialFilterRule = {};
+                let initialUpdateFields = {}
                 decisionList.forEach((decision) => {
                     initialFilterRule[decision] = false;
                     proposalCreation[decision] = false;
+                    initialUpdateFields[decision] = false;
                 });
                 setCurrentDecisionList(decisionList);
                 setInitialDecisionOrder(decisionList);
                 setProposalCreation({...proposalCreation})
                 setInitialProposalCreation({...proposalCreation})
                 setFilterRule(initialFilterRule);
+                setUpdateFields(initialUpdateFields)
             });
     }, []);
 
@@ -105,7 +109,9 @@ export default function ProposalListProvider({ children }) {
                 proposalCreation,
                 setProposalCreation, 
                 initialProposalCreation,
-                setInitialProposalCreation
+                setInitialProposalCreation,
+                updateFields,
+                setUpdateFields
             }}
         >
             {children}

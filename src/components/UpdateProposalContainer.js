@@ -2,7 +2,7 @@ import styles from './UpdateProposalContainer.module.css'
 import ToggleButton from '@/components/ToggleButton'
 import { useContext, useEffect, useState } from 'react'
 import { deptOptionList, domainOptionList } from './FilterContainer'
-import { UpdateFieldContext } from '@/context/UpdateFieldProvider'
+// import { UpdateFieldContext } from '@/context/UpdateFieldProvider'
 import { UIStateContext } from '@/context/UIStateProvider'
 import { ProposalListContext } from '@/context/ProposalListProvider'
 
@@ -11,8 +11,8 @@ import { ProposalListContext } from '@/context/ProposalListProvider'
 
 export default function UpdateProposalContainer({ currentProposal }) {
 
-    const {updateField, setUpdateField} = useContext(UpdateFieldContext)
-    const { setInitialProposal } = useContext(ProposalListContext)
+    // const {updateField, setUpdateField} = useContext(UpdateFieldContext)
+    const { setInitialProposal, updateField, setUpdateField } = useContext(ProposalListContext)
     const { setUIState } = useContext(UIStateContext)
     const [selectDepartmentList, setSelectDepartmentList] = useState([])
     const [selectDomainList, setSelectDomainList] = useState([])
@@ -31,15 +31,7 @@ export default function UpdateProposalContainer({ currentProposal }) {
         if (currentProposal) {
             setUpdateField(() => {
                 return {
-                    'departments': currentProposal['departments'],
-                    'domain': currentProposal['domain'],
-                    'doable': currentProposal['doable'].value,
-                    'profitable': currentProposal['profitable'].value,
-                    'publicService': currentProposal['publicService'].value,
-                    'sustainable': currentProposal['sustainable'].value,
-                    'deptCollab': currentProposal['deptCollab'].value,
-                    'crossCityCollab': currentProposal['crossCityCollab'].value,
-                    'internationalPromote': currentProposal['internationalPromote'].value
+                    ...currentProposal
                 }
             })
             setSelectDepartmentList([...currentProposal.departments])
@@ -93,7 +85,7 @@ export default function UpdateProposalContainer({ currentProposal }) {
             newProposalList[proposalIndex].departments = selectDepartmentList
             newProposalList[proposalIndex].domain = selectDomainList
             optionPropNames.forEach((option) => {
-                newProposalList[proposalIndex][option].value = updateField[option]
+                newProposalList[proposalIndex][option] = updateField[option]
             })
             return newProposalList
         })

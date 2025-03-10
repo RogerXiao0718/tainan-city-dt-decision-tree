@@ -12,13 +12,13 @@ export default function DetailInfoContainer({currentProposal}) {
                 currentProposal && (
                     <div className={`${styles['detail-info-container']}`}>
                         <div className={`${styles['proposal-title-container']}`}>
-                            {currentProposal.name}
+                            {currentProposal['name']}
                         </div>
                         <div className={`${styles['rows-container']}`}>
                             <div className={`${styles['row-container']}`}>
                                 <label>相關機關：</label>
                                 {
-                                    currentProposal.departments.map((dept, index) => {
+                                    currentProposal['departments'].map((dept, index) => {
                                         return (
                                             <div key={index} className={`${styles['item-card']}`}>
                                                 {dept}
@@ -30,7 +30,7 @@ export default function DetailInfoContainer({currentProposal}) {
                             <div className={`${styles['row-container']}`}>
                                 <label>應用領域：</label>
                                 {
-                                    currentProposal.domain.map((d, index) => {
+                                    currentProposal['domain'].map((d, index) => {
                                         return (
                                             <div key={index} className={`${styles['item-card']}`}>
                                                 {d}
