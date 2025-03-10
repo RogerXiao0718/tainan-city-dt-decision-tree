@@ -51,7 +51,7 @@ export default function AppHeader() {
             <div className={`${styles['left-section']}`}>
                 <Image className={`${styles['logo-image']}`} src='/images/tainan_logo.svg' alt='Tainan Logo'  width={80} height={40} />
                 <span>
-                    數位孿生提案簡易篩選
+                    臺南市政府簡易提案篩選平臺
                 </span>
             </div>
             <div className={`${styles['right-section']}`}>

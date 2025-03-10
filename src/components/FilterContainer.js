@@ -111,7 +111,6 @@ export default function FilterContainer() {
               );
             })}
           </select>
-          {/* <Image className={`${styles['select-cancel-img']}`} src='/images/cancel_plain.png' alt='cancel' width={20} height={20} /> */}
         </div>
         <div className={`${styles["condition-row"]}`}>
           <label>應用領域: </label>
