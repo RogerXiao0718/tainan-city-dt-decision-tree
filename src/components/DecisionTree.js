@@ -107,7 +107,7 @@ const createProposalTreeData = (
       let leftChild = referenceNode.children[LEFT_NODE];
       let rightChild = referenceNode.children[RIGHT_NODE];
 
-      if (proposal[layerName].value === true) {
+      if (proposal[layerName]=== true) {
         // right Node
         if (rightChild.attributes.hidden === true) {
           rightChild = displayHiddenData(rightChild);
@@ -135,7 +135,7 @@ const createProposalTreeData = (
       return referenceNode;
     } else {
       console.log(`[Debug] LayerName: ${JSON.stringify(layerName)}`)
-      if (proposal[layerName].value === true) {
+      if (proposal[layerName] === true) {
         // add left hidden node
         currentTreeNode = addChild(
           currentTreeNode,
@@ -219,9 +219,7 @@ function CustomNode({ nodeDatum, toggleNode }) {
           isProposal ? styles["proposal-node"] : ""
         } ${name ? "" : styles["empty-node"]} ${
           attributes[topLayerName] &&
-          attributes[secondLayerName] &&
-          attributes[topLayerName].value &&
-          attributes[secondLayerName].value
+          attributes[secondLayerName] 
             ? styles["great-proposal-node"]
             : ""
         }`}

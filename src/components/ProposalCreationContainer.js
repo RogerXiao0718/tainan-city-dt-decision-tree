@@ -1,16 +1,16 @@
 import styles from './ProposalCreationContainer.module.css'
 import { deptOptionList, domainOptionList } from '@/components/FilterContainer'
-import { CreateProposalContext, initialProposalCreation } from '@/context/CreateProposalProvider'
-import { ProposalListContext} from "@/context/ProposalListProvider"
+import { ProposalListContext } from "@/context/ProposalListProvider"
 import { useContext, useMemo, useState } from 'react'
 import ToggleButton from '@/components/ToggleButton'
+import pairArray from '@/utils/pairArray'
 
 // import { initialDecisionOrder } from '@/context/ProposalListProvider'
 
 export default function ProposalCreationContainer() {
 
-    const { proposalCreation, setProposalCreation } = useContext(CreateProposalContext)
-    const { setInitialProposal } = useContext(ProposalListContext)
+    // const { proposalCreation, setProposalCreation } = useContext(CreateProposalContext)
+    const { setInitialProposal, proposalCreation, setProposalCreation, initialProposalCreation, initialDecisionOrder} = useContext(ProposalListContext)
     const { departments, domain } = useMemo(() => {
         return proposalCreation
     }, [proposalCreation])
@@ -74,10 +74,10 @@ export default function ProposalCreationContainer() {
 
     const toggleButtonCallbackGenerator = (name) => {
         return () => {
-            const newProposalCreation = {...proposalCreation}
-            newProposalCreation[name].value = !proposalCreation[name].value
+            const newProposalCreation = { ...proposalCreation }
+            newProposalCreation[name] = !proposalCreation[name]
             setProposalCreation(() => {
-                return {...newProposalCreation}
+                return { ...newProposalCreation }
             })
         }
     }
@@ -95,14 +95,15 @@ export default function ProposalCreationContainer() {
                 ...proposalCreation,
                 name: newProposalName
             }
+            console.log(`[Debug]New Proposal Creation Props: ${JSON.stringify(newProposal)}`)
             setInitialProposal((initialProposal) => {
                 return [...initialProposal, newProposal]
             })
             setNewProposalName("")
             console.log(initialProposalCreation)
             setProposalCreation(() => {
-                
-                return {...initialProposalCreation}
+
+                return { ...initialProposalCreation }
             })
         }
     }
@@ -166,42 +167,60 @@ export default function ProposalCreationContainer() {
                     }
                 </div>
                 <div className={`${styles['toggle-button-form-container']}`}>
-                    <div className={`${styles['toggle-button-row-container']}`}>
+                    {
+                        pairArray(initialDecisionOrder).map((decisionNamePair, index) => {
+                            return (
+                                <div className={`${styles['toggle-button-row-container']}`} key={`decision-name-pair-container-${index}`}>
+                                    {
+                                        decisionNamePair.map((decisionName, index) => {
+                                            return (
+                                                <div className={`${styles['toggle-button-container']}`} key={`decision-name-container-${index}`}>
+                                                    <span>{`${decisionName}: `}</span>
+                                                    <ToggleButton callback={toggleButtonCallbackGenerator(decisionName)} toggled={proposalCreation[decisionName]} />
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            )
+                        })
+                    }
+                    {/* <div className={`${styles['toggle-button-row-container']}`}>
                         <div className={`${styles['toggle-button-container']}`}>
                             <span>可行性: </span>
-                            <ToggleButton callback={toggleButtonCallbackGenerator('doable')} toggled={proposalCreation['doable'].value}/>
+                            <ToggleButton callback={toggleButtonCallbackGenerator('doable')} toggled={proposalCreation['doable'].value} />
                         </div>
                         <div className={`${styles['toggle-button-container']}`}>
                             <span>商轉效益：</span>
-                            <ToggleButton callback={toggleButtonCallbackGenerator('profitable')} toggled={proposalCreation['profitable'].value}/>
+                            <ToggleButton callback={toggleButtonCallbackGenerator('profitable')} toggled={proposalCreation['profitable'].value} />
                         </div>
                     </div>
                     <div className={`${styles['toggle-button-row-container']}`}>
                         <div className={`${styles['toggle-button-container']}`}>
                             <span>公共服務: </span>
-                            <ToggleButton callback={toggleButtonCallbackGenerator('publicService')} toggled={proposalCreation['publicService'].value}/>
+                            <ToggleButton callback={toggleButtonCallbackGenerator('publicService')} toggled={proposalCreation['publicService'].value} />
                         </div>
                         <div className={`${styles['toggle-button-container']}`}>
                             <span>永續經營：</span>
-                            <ToggleButton callback={toggleButtonCallbackGenerator('sustainable')} toggled={proposalCreation['sustainable'].value}/>
+                            <ToggleButton callback={toggleButtonCallbackGenerator('sustainable')} toggled={proposalCreation['sustainable'].value} />
                         </div>
                     </div>
                     <div className={`${styles['toggle-button-row-container']}`}>
                         <div className={`${styles['toggle-button-container']}`}>
                             <span>跨機關合作: </span>
-                            <ToggleButton callback={toggleButtonCallbackGenerator('deptCollab')} toggled={proposalCreation['deptCollab'].value}/>
+                            <ToggleButton callback={toggleButtonCallbackGenerator('deptCollab')} toggled={proposalCreation['deptCollab'].value} />
                         </div>
                         <div className={`${styles['toggle-button-container']}`}>
                             <span>跨縣市合作：</span>
-                            <ToggleButton callback={toggleButtonCallbackGenerator('crossCityCollab')} toggled={proposalCreation['crossCityCollab'].value}/>
+                            <ToggleButton callback={toggleButtonCallbackGenerator('crossCityCollab')} toggled={proposalCreation['crossCityCollab'].value} />
                         </div>
                     </div>
                     <div className={`${styles['toggle-button-row-container']}`}>
                         <div className={`${styles['toggle-button-container']}`}>
                             <span>國際推廣: </span>
-                            <ToggleButton callback={toggleButtonCallbackGenerator('internationalPromote')} toggled={proposalCreation['internationalPromote'].value}/>
+                            <ToggleButton callback={toggleButtonCallbackGenerator('internationalPromote')} toggled={proposalCreation['internationalPromote'].value} />
                         </div>
-                    </div>
+                    </div> */}
                     <div className={`${styles['alert-message-container']}`}>
                         <span>{alertMessage}</span>
                     </div>

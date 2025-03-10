@@ -27,6 +27,7 @@ export default function Home() {
     setCurrentProposal,
     initialProposal,
     filterRule,
+    proposalCreation,
     setFilterRule,
   } = useContext(ProposalListContext);
   const { uiState, setUIState } = useContext(UIStateContext);
@@ -48,7 +49,7 @@ export default function Home() {
           let filterResult = true;
           for (const filterKey of filterRuleKeys) {
             if (filterRule[filterKey] === true) {
-              if (proposal[filterKey].value === false) {
+              if (proposal[filterKey] === false) {
                 filterResult = false;
               }
             }
@@ -277,7 +278,7 @@ export default function Home() {
             : ""
         }`}
       >
-        <ProposalCreationContainer />
+        { proposalCreation && <ProposalCreationContainer /> }
       </div>
       <div
         className={`${styles["update-section-container"]} ${

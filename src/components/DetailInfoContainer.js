@@ -1,7 +1,11 @@
+'use client'
 import styles from './DetailInfoContainer.module.css'
 import BooleanInfo from '@/components/BooleanInfo'
+import {useContext} from 'react'
+import { ProposalListContext } from '@/context/ProposalListProvider'
 
 export default function DetailInfoContainer({currentProposal}) {
+    const { initialDecisionOrder } = useContext(ProposalListContext)
     return (
         <div>
             {
@@ -35,7 +39,19 @@ export default function DetailInfoContainer({currentProposal}) {
                                     })
                                 }
                             </div>
-                            <div className={`${styles['row-container']}`}>
+                            {
+                                initialDecisionOrder.map((decisionName, index) => {
+                                    return (
+                                        <div className={`${styles['row-container']}`} key={`info-row-container-${index}`}>
+                                            <label>{`${decisionName}: `}</label>
+                                            {
+                                                <BooleanInfo boolValue={currentProposal[decisionName]} />
+                                            }
+                                        </div>
+                                    )
+                                })
+                            }
+                            {/* <div className={`${styles['row-container']}`}>
                                 <label>可行性：</label>
                                 {
                                     <BooleanInfo boolValue={currentProposal.doable.value} />
@@ -76,7 +92,7 @@ export default function DetailInfoContainer({currentProposal}) {
                                 {   
                                     <BooleanInfo boolValue={currentProposal.internationalPromote.value} />
                                 }
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 )

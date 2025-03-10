@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { FilterRuleContext } from "@/context/FilterRuleProvider";
 import { UIStateContext } from "@/context/UIStateProvider";
 import { ProposalListContext } from "@/context/ProposalListProvider";
+import pairArray from "@/utils/pairArray"
 
 export const deptOptionList = [
   "",
@@ -42,7 +43,7 @@ export default function FilterContainer() {
     stringArrayFilterRule,
     setStringArrayFilterRule,
   } = useContext(FilterRuleContext);
-  const { initialDecisionOrder,filterRule, setFilterRule, } = useContext(ProposalListContext);
+  const { initialDecisionOrder, filterRule, setFilterRule, } = useContext(ProposalListContext);
 
   function ToggleButtonCallbackGenerator(ruleName, setStateFunction) {
     return () => {
@@ -86,24 +87,10 @@ export default function FilterContainer() {
     setStringArrayFilterRule(newFilterRule);
   }
 
-  function pairArray(arr) {
-    return arr.reduce((result, value, index, array) => {
-      if (index % 2 === 0) {
-        if (index + 1 < array.length) {
-          result.push([value, array[index + 1]]);
-        } else {
-          result.push([value]);
-        }
-      }
-      return result;
-    }, []);
-  }
-
   return (
     <div
-      className={`${styles["filter-container"]} ${
-        filterUIAppear ? styles["filter-container-enabled"] : ""
-      }`}
+      className={`${styles["filter-container"]} ${filterUIAppear ? styles["filter-container-enabled"] : ""
+        }`}
     >
       <div className={`${styles["filter-header"]}`}>
         <span>設定篩選條件</span>
@@ -144,7 +131,7 @@ export default function FilterContainer() {
         </div>
         {initialDecisionOrder && filterRule && pairArray(initialDecisionOrder).map((pair, index) => {
           return (
-            <div className={`${styles["condition-row"]}`} key={index}>
+            <div className={`${styles["condition-row"]}`} key={`filter-condition-row-${index}`}>
               {pair.map((decisionName) => {
                 return (
                   <>
