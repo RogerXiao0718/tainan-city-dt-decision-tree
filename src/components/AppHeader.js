@@ -57,9 +57,9 @@ export default function AppHeader() {
         console.log(`[Debug] newDecisionOrder: ${newDecisionOrder}`)
         setCurrentDecisionList(newDecisionOrder);
         setInitialDecisionOrder(newDecisionOrder);
-        setProposalCreation({...proposalCreation});
+        setProposalCreation({ ...proposalCreation });
         setCurrentProposal(null)
-        setInitialProposalCreation({...proposalCreation})
+        setInitialProposalCreation({ ...proposalCreation })
         setFilterRule(initialFilterRule)
         setUpdateFields(initialUpdateFields)
     }
@@ -112,11 +112,11 @@ export default function AppHeader() {
                         }
                     })
                     data = data.map(record => {
-                        const newRecord = {...record}
+                        const newRecord = { ...record }
                         decisionOrder.forEach(decisionName => {
                             if (record[decisionName].trim() === 'O') {
                                 newRecord[decisionName] = true
-                            }  else {
+                            } else {
                                 newRecord[decisionName] = false
                             }
                         })
@@ -153,9 +153,14 @@ export default function AppHeader() {
                 </span>
             </div>
             <div className={`${styles['right-section']}`}>
-
                 <div className={`${styles['proposal-button']}`}>
-                    <button id="example-button" className={`${styles['import-button']}`}/>
+                    <button id="document-button" className={`${styles['import-button']}`} />
+                    <label for="document-button">
+                        <a href="/data/操作說明.pdf" download>操作說明</a>
+                    </label>
+                </div>
+                <div className={`${styles['proposal-button']}`}>
+                    <button id="example-button" className={`${styles['import-button']}`} />
                     <label for="example-button">
                         <a href="/data/提案範例.csv" download>提案範例</a>
                     </label>
