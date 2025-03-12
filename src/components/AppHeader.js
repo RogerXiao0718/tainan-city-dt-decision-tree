@@ -153,6 +153,14 @@ export default function AppHeader() {
                 </span>
             </div>
             <div className={`${styles['right-section']}`}>
+
+                <div className={`${styles['proposal-button']}`}>
+                    <button id="example-button" className={`${styles['import-button']}`}/>
+                    <label for="example-button">
+                        <a href="/data/提案範例.csv" download>提案範例</a>
+                    </label>
+                </div>
+
                 <div className={`${styles['proposal-button']}`}>
                     <input id="import-button" className={`${styles['import-button']}`} type="file" onChange={onImportChange} />
                     <label for="import-button">匯入提案</label>
